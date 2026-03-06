@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     
                     <!-- REAL CONTENT -->
-                    <a href="${cleanUrl}" class="card-image-wrapper clean-url-link block">
+                    <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="card-image-wrapper clean-url-link block">
                         <img src="${imagePath}" alt="${exp.name}" class="card-img" loading="lazy" 
                              onerror="this.style.opacity='0'">
                     </a>
@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <p class="card-desc">${exp.desc}</p>
                         <div class="mt-auto pt-6 gap-3 grid grid-cols-2">
-                            <a href="${cleanUrl}" class="clean-url-link flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium bg-primary text-black rounded-lg hover:bg-white transition-all shadow-sm">
+                            <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="clean-url-link flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium bg-primary text-black rounded-lg hover:bg-white transition-all shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                Preview
+                                View Preview
                             </a>
                             <button data-path="${cleanUrl}" class="btn-copy-prompt flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium bg-surface border border-border text-primary rounded-lg hover:bg-border transition-all">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
@@ -183,7 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.location.protocol === 'file:') {
                 e.preventDefault();
                 const targetPath = link.getAttribute('href');
-                window.location.href = targetPath + '.html';
+                const fullPath = targetPath.endsWith('.html') ? targetPath : targetPath + '.html';
+                
+                if (link.getAttribute('target') === '_blank') {
+                    window.open(fullPath, '_blank');
+                } else {
+                    window.location.href = fullPath;
+                }
             }
         });
     });
