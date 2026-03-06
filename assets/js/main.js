@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = html;
     };
 
-    renderGallery(systemExperiments.gemini, 'gemini-grid', './assets/preview/gemini', './gimini-models');
+    renderGallery(systemExperiments.gemini, 'gemini-grid', './assets/preview/gemini', './gemini-models');
     renderGallery(systemExperiments.gpt, 'gpt-grid', './assets/preview/gpt', './gpt-models');
     renderGallery(systemExperiments.claude, 'claude-grid', './assets/preview/claude', './claude-models');
 

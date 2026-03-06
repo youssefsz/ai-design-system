@@ -6,16 +6,26 @@ This repository serves as a centralized collection of high fidelity design model
 
 ## Project Structure
 
-The design system is categorized into two primary collections of models:
+The design system is categorized into three primary collections of models:
 
-- Gimini Models
+- Claude Models
+- Gemini Models
 - GPT Models
 
 Each file within these directories functions as a standalone design template. Crucially, every template includes an embedded instruction block at the top of the document. These instructions document the precise rules required to replicate the specific aesthetic, covering typography, color palettes, spacing constraints, CSS effects, and layout architectures.
 
 ## Included Aesthetics
 
-### Gimini Models
+### Claude Models
+
+- Aurora Gradient: Ethereal, futuristic, and premium. Features mesh/aurora gradients, glassmorphism, and smooth transitions.
+- Ceramic Minimal: Intentional, matte, and calm. Blends Japanese minimalism with Scandinavian design, focusing on whitespace and soft ceramic tones.
+- Duotone Bold: Loud, graphic, and high-impact. A two-color poster-art aesthetic with massive typography and hard-edged geometric shapes.
+- Noir Editorial: Cinematic, dramatic, and high-fashion. A monochrome magazine-style aesthetic with high-contrast serif headings and layered depth.
+- Paper Craft: Tactile, handmade, and warm. Simulates physical paper layers with offset shadows, ink-on-paper textures, and organic rotations.
+- Terminal Green: Retro-futuristic and hacker-inspired. A phosphor CRT terminal style with 100% monospace typography, scanlines, and glowing green elements.
+
+### Gemini Models
 
 - Corporate Geometric: Enterprise grade, clean, minimal, and highly professional. Uses a trustworthy corporate palette with fine gradients.
 - Dark Cyber: Retro futuristic hacker terminal style. Features glowing neon interfaces, scanlines, and strict monospace typography.
