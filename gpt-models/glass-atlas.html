@@ -1,0 +1,324 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create an immersive, "Luminous Enterprise" glassmorphism dashboard or landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Deep tech, cinematic, data-heavy, precise, advanced infrastructure.
+- Typography: Modern geometric sans-serifs (e.g., 'Sora' for headings, 'Plus Jakarta Sans' for body text) conveying clarity and authority.
+- Colors: Deep space/navy background (`#06111f` to `#050b14`). Text is an icy pale blue/white (`#e8f4ff`). Accents are vibrant, glowing cyan (`#74d7d1`) and electric blue (`#4ca6ff`).
+- Lighting & Background: Use fixed CSS radial gradients or highly blurred glowing orbs (`filter: blur(80px)`) in the background to cast colored "light" onto the UI elements above.
+- Core Glass Effects: All primary containers must be deep glass panels (`rgba(10, 22, 36, 0.45)`) heavily blurred (`backdrop-filter: blur(24px)`). Add a very subtle white border to catch the light.
+- Depth & Shadows: Use deep, multi-layered drop shadows (`box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3)`) to make the glass panels float above the dark background. On hover, increase the shadow and glow intensity.
+- UI Details: Include small technical details like pulsing status dots, small uppercase tracking text (`tracking-[0.4em]`), and sweeping "beam" or glare animations over cards.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlas One | Glass Depth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#06111f',
+            ice: '#e8f4ff',
+            aqua: '#74d7d1',
+            glow: '#4ca6ff',
+            steel: '#8da3bd'
+          },
+          fontFamily: {
+            display: ['Sora', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --navy: #06111f;
+      --ice: #e8f4ff;
+      --aqua: #74d7d1;
+      --glow: #4ca6ff;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 15%, rgba(76, 166, 255, 0.2), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(116, 215, 209, 0.15), transparent 30%),
+        linear-gradient(180deg, #091423 0%, #050b14 100%);
+      min-height: 100vh;
+    }
+
+    .glass {
+      background: rgba(10, 22, 36, 0.45);
+      border: 1px solid rgba(232, 244, 255, 0.08);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.05),
+        0 20px 50px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .glass-card {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(12, 26, 42, 0.6);
+      border-color: rgba(116, 215, 209, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 
+        0 0 30px rgba(76, 166, 255, 0.1),
+        0 30px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .beam {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+      transform: translateX(-150%);
+      transition: transform 1s ease;
+    }
+
+    .beam-wrap:hover .beam {
+      transform: translateX(150%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 100ms; }
+    .stagger-2 { transition-delay: 200ms; }
+    .stagger-3 { transition-delay: 300ms; }
+
+    .glow-dot {
+      filter: blur(8px);
+      animation: pulse-glow 3s infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      from { opacity: 0.5; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--aqua);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="font-body text-ice antialiased">
+  <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+    <div class="absolute top-[10%] left-[20%] w-[500px] h-[500px] rounded-full bg-glow/5 glow-dot"></div>
+    <div class="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] rounded-full bg-aqua/5 glow-dot" style="animation-delay: -1.5s;"></div>
+  </div>
+
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-6 py-8 lg:px-10">
+    <div class="flex items-center gap-4 group cursor-pointer">
+      <div class="relative h-4 w-4">
+        <div class="absolute inset-0 rounded-full bg-aqua blur-md opacity-60 group-hover:opacity-100 transition-opacity"></div>
+        <div class="absolute inset-1 rounded-full bg-aqua"></div>
+      </div>
+      <span class="text-[11px] font-bold uppercase tracking-[0.4em] text-ice/80 group-hover:text-ice transition-colors">Atlas One</span>
+    </div>
+    <nav class="hidden gap-12 text-[11px] font-bold uppercase tracking-[0.25em] text-ice/50 md:flex">
+      <a href="#platform" class="nav-link transition hover:text-ice">Platform</a>
+      <a href="#story" class="nav-link transition hover:text-ice">Story</a>
+      <a href="#contact" class="nav-link transition hover:text-ice">Contact</a>
+    </nav>
+    <a href="#contact" class="glass rounded-full px-6 py-2.5 text-[11px] font-bold uppercase tracking-widest text-ice border border-white/10 hover:border-aqua/50 hover:bg-white/5 transition-all">
+      Request Access
+    </a>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <!-- Hero Section -->
+    <section class="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center py-16 lg:py-24">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-aqua mb-6">Fluid enterprise interface</p>
+        <h1 class="font-display text-5xl leading-[0.95] sm:text-7xl lg:text-[6.5rem] tracking-tight">
+          Luminous <span class="text-white">depth</span> for precise performance.
+        </h1>
+        <p class="mt-8 max-w-xl text-xl leading-relaxed text-ice/60">
+          Atlas One uses controlled blur and layered panels to present enterprise capability without visual fatigue. Built for data-heavy launches.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-5">
+          <a href="#platform" class="rounded-full bg-ice px-8 py-4 text-xs font-bold uppercase tracking-widest text-navy transition-all hover:bg-white hover:-translate-y-1 shadow-lg shadow-ice/10">
+            Explore System
+          </a>
+          <button id="glowButton" class="glass rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest text-ice border border-white/10 hover:border-aqua/30 transition-all hover:-translate-y-1">
+            Shift Atmosphere
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-6">
+        <div class="glass beam-wrap relative overflow-hidden rounded-[32px] p-8 glass-card border-white/5">
+          <div class="beam"></div>
+          <div class="relative z-10">
+            <div class="flex items-center justify-between mb-8">
+              <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-ice/40">Command layer</p>
+              <div class="h-2 w-2 rounded-full bg-aqua shadow-[0_0_10px_rgba(116,215,209,0.5)]"></div>
+            </div>
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div class="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <p class="text-4xl font-bold tracking-tighter text-white">142<span class="text-aqua text-xl ml-1">ms</span></p>
+                <p class="mt-2 text-[10px] uppercase font-bold tracking-widest text-ice/40">Load window</p>
+              </div>
+              <div class="rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm">
+                <p class="text-4xl font-bold tracking-tighter text-white">18</p>
+                <p class="mt-2 text-[10px] uppercase font-bold tracking-widest text-ice/40">Surfaces</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-[32px] p-8 glass-card border-white/5">
+          <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-ice/40 mb-6">Why it works</p>
+          <p class="text-lg leading-relaxed text-ice/70">
+            The page blends a cinematic atmosphere with structural discipline. Every panel reinforces clarity while the motion keeps the experience organic.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="platform" class="grid gap-6 py-20 lg:grid-cols-3 lg:py-32">
+      <article class="reveal stagger-1 glass rounded-[32px] p-10 glass-card">
+        <div class="h-8 w-8 rounded-lg bg-aqua/10 border border-aqua/20 flex items-center justify-center mb-8">
+          <svg class="text-aqua" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.73z"></path></svg>
+        </div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-aqua">Signal</p>
+        <h2 class="mt-4 text-2xl font-bold text-white tracking-tight">Layered hierarchy</h2>
+        <p class="mt-6 text-base leading-relaxed text-ice/60">Foreground panels and atmospheric fields build dimensionality without adding unnecessary visual noise.</p>
+      </article>
+
+      <article class="reveal stagger-2 glass rounded-[32px] p-10 glass-card">
+        <div class="h-8 w-8 rounded-lg bg-glow/10 border border-glow/20 flex items-center justify-center mb-8">
+          <svg class="text-glow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-glow">Motion</p>
+        <h2 class="mt-4 text-2xl font-bold text-white tracking-tight">Light-touch flow</h2>
+        <p class="mt-6 text-base leading-relaxed text-ice/60">Micro-transitions guide the user through complex information paths instead of asking them to hunt for meaning.</p>
+      </article>
+
+      <article class="reveal stagger-3 glass rounded-[32px] p-10 glass-card">
+        <div class="h-8 w-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+          <svg class="text-ice" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-ice/40">Trust</p>
+        <h2 class="mt-4 text-2xl font-bold text-white tracking-tight">Enterprise tone</h2>
+        <p class="mt-6 text-base leading-relaxed text-ice/60">The finish is cinematic, but the page prioritizes product comprehension and conversion-ready clarity.</p>
+      </article>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="story" class="grid gap-12 border-t border-white/5 py-20 lg:grid-cols-[1fr_1.1fr] lg:py-32">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-aqua">Client reflection</p>
+        <h3 class="mt-8 font-display text-4xl leading-tight sm:text-6xl text-white">
+          "The product was always advanced. The page finally made it <span class="italic text-aqua">feel</span> advanced."
+        </h3>
+      </div>
+      <div class="grid gap-6">
+        <div class="glass rounded-[32px] p-8 glass-card">
+          <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-ice/40 mb-4">Use case</p>
+          <p class="text-lg leading-relaxed text-ice/70">Best for data platforms, B2B infrastructure, and technical workflow tools that need an elevated launch presence.</p>
+        </div>
+        <div class="glass rounded-[32px] p-8 glass-card border-aqua/10">
+          <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-ice/40 mb-4">Commercial outcome</p>
+          <p class="text-lg leading-relaxed text-ice/70">Stronger message recall, increased time-on-page, and a noticeable jump in perceived product maturity.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t border-white/5 bg-black/20 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-aqua">Atlas One</p>
+        <p class="mt-6 text-xl font-medium text-ice/60 max-w-md">
+          Built for teams that want technical credibility with cinematic polish.
+        </p>
+      </div>
+      <a href="mailto:atlas@one.design" class="glass rounded-full px-8 py-5 text-lg font-bold tracking-tight text-white hover:border-aqua/50 hover:bg-white/5 transition-all group flex items-center gap-4">
+        atlas@one.design
+        <svg class="group-hover:translate-x-1 transition-transform" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 py-8 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.3em] text-ice/20 lg:px-10">
+      &copy; 2026 Atlas One Engineering. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // Atmosphere Switcher
+    const atmospheres = [
+      'radial-gradient(circle at 15% 15%, rgba(76, 166, 255, 0.2), transparent 35%), radial-gradient(circle at 85% 15%, rgba(116, 215, 209, 0.15), transparent 30%), linear-gradient(180deg, #091423 0%, #050b14 100%)',
+      'radial-gradient(circle at 85% 15%, rgba(116, 215, 209, 0.2), transparent 35%), radial-gradient(circle at 15% 85%, rgba(76, 166, 255, 0.15), transparent 30%), linear-gradient(180deg, #050b14 0%, #091423 100%)',
+      'radial-gradient(circle at 50% 50%, rgba(76, 166, 255, 0.15), transparent 50%), linear-gradient(180deg, #0b1a2d 0%, #050b14 100%)'
+    ];
+    let atmosphereIndex = 0;
+
+    document.getElementById('glowButton').addEventListener('click', () => {
+      atmosphereIndex = (atmosphereIndex + 1) % atmospheres.length;
+      document.body.style.transition = 'background 1.5s ease-in-out';
+      document.body.style.background = atmospheres[atmosphereIndex];
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

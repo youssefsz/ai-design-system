@@ -1,0 +1,324 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a high-energy, "Dynamic Kinetic" agency/SaaS landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Fast, fluid, trendy, aggressive, modern web3/startup.
+- Typography: Use a heavy, impactful grotesque font (e.g., 'Bricolage Grotesque') for tight, massive headings. Pair with a clean, geometric sans (e.g., 'Outfit') for body text.
+- Colors: Absolute pitch-black void background (`#0a0a0c`). High-saturation neon accents: Violet (`#8b5cf6`), Cyan (`#22d3ee`), and Electric Blue (`#4f46e5`).
+- Background Art: Feature a massive, heavily blurred (`blur(80px)`), slowly rotating/morphing CSS radial-gradient wave in the background that breathes life into the pitch-black canvas.
+- UI Elements: Cards and surfaces should be dark, semi-transparent overlays (`background: rgba(255, 255, 255, 0.03)`) with a subtle `backdrop-filter: blur(20px)` and thin, barely visible white borders.
+- Gradients: Use linear gradients for primary hero text (e.g., white to cyan) to make it pop against the dark background.
+- Motion & Interaction: Elements must feel alive. Use floating CSS keyframe animations (`translateY`) on focal points. Hovering over cards should cause them to physically scale up (`scale(1.02)`) and emit a soft neon colored shadow. Button hover states must be highly reactive, changing background and text colors rapidly.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinetic Wave | Dynamic Flow</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            void: '#0a0a0c',
+            violet: '#8b5cf6',
+            cyan: '#22d3ee',
+            electric: '#4f46e5',
+            quartz: '#e2e8f0'
+          },
+          fontFamily: {
+            display: ['Bricolage Grotesque', 'sans-serif'],
+            body: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --violet: #8b5cf6;
+      --cyan: #22d3ee;
+      --void: #0a0a0c;
+    }
+
+    body {
+      background-color: var(--void);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .wave-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.4;
+      filter: blur(80px);
+      background: 
+        radial-gradient(circle at 0% 0%, var(--violet), transparent 40%),
+        radial-gradient(circle at 100% 100%, var(--cyan), transparent 40%),
+        radial-gradient(circle at 50% 50%, var(--electric), transparent 40%);
+      animation: wave-move 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes wave-move {
+      0% { transform: scale(1) translate(0, 0); }
+      50% { transform: scale(1.1) translate(2%, 2%); }
+      100% { transform: scale(1) translate(-2%, -2%); }
+    }
+
+    .glass-dark {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 100ms; }
+    .stagger-2 { transition-delay: 200ms; }
+    .stagger-3 { transition-delay: 300ms; }
+
+    .kinetic-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .kinetic-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--cyan);
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 30%, var(--cyan) 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .line-draw {
+      position: relative;
+    }
+
+    .line-draw::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--violet), var(--cyan));
+      transition: width 0.4s ease;
+    }
+
+    .line-draw:hover::after {
+      width: 100%;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    @keyframes bar-grow {
+      from { width: 0; }
+      to { width: 70%; }
+    }
+
+    .float-anim {
+      animation: float 3s ease-in-out infinite alternate;
+    }
+  </style>
+</head>
+<body class="font-body antialiased">
+  <div class="wave-bg"></div>
+
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-6 py-8 lg:px-10">
+    <div class="flex items-center gap-3 group cursor-pointer">
+      <div class="h-6 w-6 rounded-full bg-gradient-to-br from-violet to-cyan animate-pulse"></div>
+      <span class="text-xs font-bold uppercase tracking-[0.4em] text-white/90">Kinetic Wave</span>
+    </div>
+    <nav class="hidden gap-12 text-[11px] font-bold uppercase tracking-[0.3em] text-white/40 md:flex">
+      <a href="#flow" class="hover:text-white transition-colors line-draw">Flow</a>
+      <a href="#energy" class="hover:text-white transition-colors line-draw">Energy</a>
+      <a href="#contact" class="hover:text-white transition-colors line-draw">Contact</a>
+    </nav>
+    <a href="#contact" class="rounded-full bg-white px-8 py-3 text-[11px] font-bold uppercase tracking-widest text-void transition-all hover:bg-cyan hover:-translate-y-0.5">
+      Launch Project
+    </a>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <!-- Hero Section -->
+    <section class="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center py-12 lg:py-24">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-cyan mb-8">Dynamic interface motion</p>
+        <h1 class="gradient-text font-display text-5xl leading-[0.95] sm:text-7xl lg:text-[7.8rem] tracking-tight">
+          Motion is the new <span class="italic">Standard.</span>
+        </h1>
+        <p class="mt-10 max-w-xl text-xl font-medium leading-relaxed text-white/60">
+          Kinetic Wave builds landing pages that feel alive. High-energy transitions, fluid backgrounds, and reactive elements for brands that move fast.
+        </p>
+        <div class="mt-12 flex flex-wrap gap-6">
+          <a href="#energy" class="rounded-full bg-violet px-10 py-5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-cyan hover:text-void hover:-translate-y-1 shadow-2xl shadow-violet/20">
+            See the Flow
+          </a>
+          <button id="bgReset" class="rounded-full border border-white/10 bg-white/5 px-10 py-5 text-xs font-bold uppercase tracking-widest transition-all hover:bg-white/10 hover:-translate-y-1">
+            Reset Energy
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal stagger-1 flex justify-center lg:justify-end">
+        <div class="relative float-anim">
+          <div class="glass-dark rounded-[40px] p-10 w-full max-w-md border-white/10">
+            <div class="flex items-center justify-between mb-10">
+              <div class="px-3 py-1 bg-cyan/10 border border-cyan/20 rounded-full text-[9px] font-bold text-cyan uppercase tracking-widest">Active Pulse</div>
+              <div class="text-xs text-white/30 font-mono">v4.0.2</div>
+            </div>
+            <div class="space-y-6">
+              <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-violet to-cyan w-[70%]" style="animation: bar-grow 2s ease-out"></div>
+              </div>
+              <p class="text-3xl font-display font-bold">1.2s <span class="text-sm text-white/40 block mt-2">Interaction Speed</span></p>
+              <div class="grid grid-cols-2 gap-4 pt-6">
+                <div class="rounded-2xl bg-white/5 p-5 border border-white/5">
+                  <p class="text-xs text-white/30 mb-2 uppercase tracking-widest">Uptime</p>
+                  <p class="text-xl font-bold">99.9%</p>
+                </div>
+                <div class="rounded-2xl bg-white/5 p-5 border border-white/5">
+                  <p class="text-xs text-white/30 mb-2 uppercase tracking-widest">Rate</p>
+                  <p class="text-xl font-bold">120Hz</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative blobs -->
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-violet/20 blur-3xl rounded-full"></div>
+          <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-cyan/20 blur-3xl rounded-full"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Energy Section -->
+    <section id="flow" class="grid gap-6 py-20 lg:grid-cols-3 lg:py-32">
+      <article class="reveal stagger-1 kinetic-card rounded-[32px] p-12 glass-dark">
+        <div class="h-10 w-10 bg-violet/20 flex items-center justify-center rounded-xl mb-8 border border-violet/30">
+          <svg class="text-violet" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h2 class="text-2xl font-display font-bold mb-4">React Flow</h2>
+        <p class="text-white/50 leading-relaxed font-medium">Elements that respond to user intent instantly. No latency, just rhythmic interaction.</p>
+      </article>
+
+      <article class="reveal stagger-2 kinetic-card rounded-[32px] p-12 glass-dark">
+        <div class="h-10 w-10 bg-cyan/20 flex items-center justify-center rounded-xl mb-8 border border-cyan/30">
+          <svg class="text-cyan" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
+        <h2 class="text-2xl font-display font-bold mb-4">Liquid Layout</h2>
+        <p class="text-white/50 leading-relaxed font-medium">Structural components that adapt to content with fluid ease, maintaining high-end balance.</p>
+      </article>
+
+      <article class="reveal stagger-3 kinetic-card rounded-[32px] p-12 glass-dark">
+        <div class="h-10 w-10 bg-white/10 flex items-center justify-center rounded-xl mb-8 border border-white/20">
+          <svg class="text-white" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20m7-18l-7 7-7-7"></path></svg>
+        </div>
+        <h2 class="text-2xl font-display font-bold mb-4">Linear Proof</h2>
+        <p class="text-white/50 leading-relaxed font-medium">Data storytelling told through motion, turning complex stats into an engaging kinetic narrative.</p>
+      </article>
+    </section>
+
+    <!-- Project Section -->
+    <section id="energy" class="grid gap-12 border-t border-white/5 py-20 lg:grid-cols-[1fr_1.1fr] lg:py-32">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-cyan">Featured Energy</p>
+        <h3 class="mt-8 font-display text-5xl sm:text-7xl leading-tight">Vortex Engine</h3>
+        <p class="mt-8 text-xl font-medium text-white/40">Powering the next generation of real-time design systems.</p>
+      </div>
+      <div class="grid gap-6">
+        <div class="reveal stagger-1 glass-dark rounded-[32px] p-10 kinetic-card">
+          <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 mb-6">Outcome</p>
+          <p class="text-3xl font-display font-bold leading-tight">40% Decrease in exit rates via interactive storytelling.</p>
+        </div>
+        <div class="reveal stagger-2 rounded-[32px] bg-gradient-to-br from-violet to-electric p-10 shadow-2xl shadow-electric/20">
+          <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/50 mb-6">Strategy</p>
+          <p class="text-xl font-bold leading-relaxed">High-energy visual pacing creates momentum. Momentum translates directly into conversion.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t border-white/10 bg-void/50 pt-24 pb-12 backdrop-blur-3xl">
+    <div class="mx-auto flex max-w-7xl flex-col gap-16 px-6 lg:flex-row lg:items-end lg:justify-between lg:px-10">
+      <div class="max-w-xl">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-violet">Kinetic Wave</p>
+        <h4 class="mt-8 font-display text-4xl sm:text-6xl text-white leading-tight">
+          Ready to put your brand in <span class="italic text-cyan">Motion?</span>
+        </h4>
+      </div>
+      <div class="flex flex-col gap-8">
+        <a href="mailto:flow@kinetic.design" class="group flex items-center gap-6 text-3xl font-bold tracking-tight text-white hover:text-cyan transition-colors">
+          flow@kinetic.design
+          <svg class="group-hover:-rotate-45 transition-transform" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 mt-32 pt-10 border-t border-white/5 text-[10px] font-bold uppercase tracking-[0.4em] text-white/20 lg:px-10">
+      &copy; 2026 Kinetic Wave Systems. All motion reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // BG Reset Interaction
+    document.getElementById('bgReset').addEventListener('click', () => {
+      const bg = document.querySelector('.wave-bg');
+      bg.style.transition = 'all 1s ease';
+      bg.style.filter = 'blur(120px) hue-rotate(90deg)';
+      setTimeout(() => {
+        bg.style.filter = 'blur(80px) hue-rotate(0deg)';
+      }, 1000);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

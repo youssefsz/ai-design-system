@@ -1,0 +1,319 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a premium, "Warm Luxury / Hospitality" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Tactile, expensive, lived-in, tailored, calm, high-end hospitality.
+- Typography: Use a sophisticated, classic serif font (e.g., 'Cormorant Garamond') extensively for massive headings, leveraging italics for emphasis. Pair with a clean, geometric sans-serif (e.g., 'Outfit') for readable body copy.
+- Colors: Earthy, warm, luxury palette. Soft cream background (`#f7f1e7`), deep espresso text (`#21170f`). Utilize warm amber (`#d59b43`), blush, and soft olive for accents and gradients.
+- Background & Lighting: Float large, highly blurred (`30-40% transparent`), warm radial gradients in the background to create a sense of glowing ambient light.
+- Shapes: Use very generous, soft rounded corners on layout blocks (e.g., `rounded-[32px]` or `rounded-[40px]`). 
+- Borders & Shadows: Use very delicate borders (`border border-white/80` or `border-espresso/5`). Drop shadows should be massive, incredibly soft, and warm-tinted (e.g., `box-shadow: 0 30px 60px -12px rgba(33, 23, 15, 0.1)`). Use warm glassmorphism (`background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(16px)`).
+- Interactivity: Everything should feel slow and plush. Use long, graceful transitions (`0.5s to 0.9s cubic-bezier`).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solaris Luxe | Premium Warmth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#f7f1e7',
+            espresso: '#21170f',
+            amber: '#d59b43',
+            blush: '#e9cdb5',
+            olive: '#798165'
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --cream: #f7f1e7;
+      --espresso: #21170f;
+      --amber: #d59b43;
+      --blush: #e9cdb5;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 80% 10%, rgba(213, 155, 67, 0.08), transparent 30%),
+        radial-gradient(circle at 10% 90%, rgba(121, 129, 101, 0.06), transparent 30%),
+        #fbf9f6;
+      color: var(--espresso);
+    }
+
+    .glass-warm {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(33, 23, 15, 0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 150ms; }
+    .stagger-2 { transition-delay: 300ms; }
+    .stagger-3 { transition-delay: 450ms; }
+
+    .card-luxury {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-luxury:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 30px 60px -12px rgba(33, 23, 15, 0.1);
+      border-color: rgba(213, 155, 67, 0.3);
+    }
+
+    .halo-effect {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .halo-effect::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(213, 155, 67, 0.15), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .halo-effect:hover::after {
+      opacity: 1;
+    }
+
+    ::selection {
+      background: var(--amber);
+      color: white;
+    }
+
+    .gold-link {
+      position: relative;
+      display: inline-block;
+    }
+
+    .gold-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gold-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  </style>
+</head>
+<body class="font-body antialiased">
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-6 py-10 lg:px-10">
+    <div class="group cursor-pointer">
+      <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-amber group-hover:text-espresso transition-colors">Solaris Luxe</p>
+    </div>
+    <nav class="hidden gap-12 text-[12px] font-bold uppercase tracking-[0.2em] text-espresso/40 md:flex">
+      <a href="#experience" class="hover:text-espresso transition-colors gold-link">Experience</a>
+      <a href="#collection" class="hover:text-espresso transition-colors gold-link">Collection</a>
+      <a href="#contact" class="hover:text-espresso transition-colors gold-link">Contact</a>
+    </nav>
+    <a href="#contact" class="rounded-full border border-espresso/10 bg-white/40 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md transition-all hover:bg-white hover:border-amber/40 hover:-translate-y-0.5">
+      Private Preview
+    </a>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <!-- Hero Section -->
+    <section class="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center py-12 lg:py-24">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-amber mb-8">Premium hospitality direction</p>
+        <h1 class="font-display text-6xl leading-[0.9] sm:text-8xl lg:text-[8rem] tracking-tight">
+          Warm luxury <span class="italic font-medium">without</span> the noise.
+        </h1>
+        <p class="mt-10 max-w-xl text-xl font-medium leading-relaxed text-espresso/60">
+          Solaris Luxe uses soft contrast, expressive serif typography, and textured gradients to create a page that feels tailored, high-value, and welcoming.
+        </p>
+        <div class="mt-12 flex flex-wrap gap-6">
+          <a href="#collection" class="rounded-full bg-espresso px-10 py-5 text-xs font-bold uppercase tracking-widest text-cream transition-all hover:bg-[#31241a] hover:-translate-y-1 shadow-2xl shadow-espresso/20">
+            View Collection
+          </a>
+          <button id="moodToggle" class="rounded-full border border-espresso/10 bg-white/50 px-10 py-5 text-xs font-bold uppercase tracking-widest transition-all hover:bg-white hover:-translate-y-1">
+            Change Mood
+          </button>
+        </div>
+      </div>
+
+      <div class="reveal stagger-1 halo-effect group rounded-[40px] border border-white/80 bg-white/40 p-8 glass-warm shadow-2xl shadow-espresso/5">
+        <div class="grid gap-6">
+          <div class="rounded-[32px] bg-espresso p-10 text-cream">
+            <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-amber mb-6">Signature</p>
+            <p class="font-display text-4xl leading-tight italic">
+              Elegant pacing, tactile warmth, and a calm sense of status.
+            </p>
+          </div>
+          <div class="grid gap-6 sm:grid-cols-2">
+            <div class="rounded-[32px] bg-blush/30 p-8 border border-white/20">
+              <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-espresso/40 mb-4">Best fit</p>
+              <p class="text-lg font-bold leading-tight">Hospitality, fashion, & wellness.</p>
+            </div>
+            <div class="rounded-[32px] bg-olive/10 p-8 border border-white/20">
+              <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-espresso/40 mb-4">Outcome</p>
+              <p class="text-lg font-bold leading-tight">Perceived quality from the first fold.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="grid gap-8 py-20 lg:grid-cols-3 lg:py-32">
+      <article class="reveal stagger-1 card-luxury rounded-[32px] p-12 glass-warm border-white/40">
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-amber">01 Atmosphere</p>
+        <h2 class="mt-8 font-display text-4xl italic">Soft authority</h2>
+        <p class="mt-8 text-lg leading-relaxed text-espresso/60">The palette feels expensive because it is controlled, not because it is loud. Restraint is the highest form of luxury.</p>
+      </article>
+
+      <article class="reveal stagger-2 card-luxury rounded-[32px] p-12 glass-warm border-white/40">
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-amber">02 Typography</p>
+        <h2 class="mt-8 font-display text-4xl italic">Refined contrast</h2>
+        <p class="mt-8 text-lg leading-relaxed text-espresso/60">High-contrast serif headlines pair with clean sans body copy to keep the page readable, clinical, and elevated.</p>
+      </article>
+
+      <article class="reveal stagger-3 card-luxury rounded-[32px] p-12 glass-warm border-white/40">
+        <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-amber">03 Conversion</p>
+        <h2 class="mt-8 font-display text-4xl italic">Quiet confidence</h2>
+        <p class="mt-8 text-lg leading-relaxed text-espresso/60">Calls to action are placed with intentionality so the page sells without looking desperate or transactional.</p>
+      </article>
+    </section>
+
+    <!-- Collection Section -->
+    <section id="collection" class="grid gap-16 border-t border-espresso/5 py-20 lg:grid-cols-[1fr_1.1fr] lg:py-32">
+      <div class="reveal">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-amber">Collection Notes</p>
+        <h3 class="mt-10 font-display text-5xl sm:text-7xl leading-[0.9] text-espresso tracking-tight">
+          The aesthetic feels <span class="italic text-amber/80">lived-in</span>, not synthetic.
+        </h3>
+        <p class="mt-8 text-xl text-espresso/40">Designed for brands that value heritage and tactile experience.</p>
+      </div>
+      <div class="grid gap-8">
+        <div class="reveal stagger-1 rounded-[40px] border border-espresso/5 bg-white/40 p-10 glass-warm">
+          <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-espresso/30 mb-6">Visual ingredients</p>
+          <p class="text-2xl font-medium leading-relaxed">
+            Cream grounds, amber highlights, textured gradients, and spacious composition.
+          </p>
+        </div>
+        <div class="reveal stagger-2 rounded-[40px] bg-espresso p-12 text-cream shadow-2xl">
+          <p class="text-[10px] font-bold uppercase tracking-[0.4em] text-cream/30 mb-6">Commercial effect</p>
+          <p class="text-2xl font-medium leading-relaxed">
+            It increases perceived care, which builds trust before a user reads a single word of proof.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t border-espresso/5 bg-white/40 pb-16 pt-24 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl flex-col gap-16 px-6 lg:flex-row lg:items-start lg:justify-between lg:px-10">
+      <div class="max-w-xl">
+        <p class="text-[11px] font-bold uppercase tracking-[0.4em] text-amber">Solaris Luxe</p>
+        <h4 class="mt-10 font-display text-4xl sm:text-5xl italic leading-tight">
+          For brands that need polish, warmth, and clinical clarity.
+        </h4>
+      </div>
+      <div class="flex flex-col gap-8">
+        <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-espresso/40">Inquiries</p>
+        <a href="mailto:solaris@luxe.design" class="group flex items-center gap-6 text-3xl font-bold tracking-tight text-espresso hover:text-amber transition-colors">
+          solaris@luxe.design
+          <svg class="group-hover:translate-x-2 transition-transform" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 mt-24 pt-8 border-t border-espresso/5 text-[9px] font-bold uppercase tracking-[0.4em] text-espresso/20 lg:px-10">
+      &copy; 2026 Solaris Hospitality Group. Proprietary Design System.
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // Halo follow effect
+    const halos = document.querySelectorAll('.halo-effect');
+    halos.forEach(halo => {
+      halo.addEventListener('mousemove', e => {
+        const rect = halo.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        halo.style.setProperty('--x', `${x}%`);
+        halo.style.setProperty('--y', `${y}%`);
+      });
+    });
+
+    // Mood Toggle
+    const backgrounds = [
+      'radial-gradient(circle at 80% 10%, rgba(213, 155, 67, 0.08), transparent 30%), radial-gradient(circle at 10% 90%, rgba(121, 129, 101, 0.06), transparent 30%), #fbf9f6',
+      'radial-gradient(circle at 10% 10%, rgba(233, 205, 181, 0.12), transparent 30%), radial-gradient(circle at 90% 90%, rgba(213, 155, 67, 0.08), transparent 30%), #fdfaf7',
+      'radial-gradient(circle at 50% 10%, rgba(121, 129, 101, 0.05), transparent 40%), #fbf9f6'
+    ];
+    let bgIndex = 0;
+
+    document.getElementById('moodToggle').addEventListener('click', () => {
+      bgIndex = (bgIndex + 1) % backgrounds.length;
+      document.body.style.transition = 'background 1.5s ease-in-out';
+      document.body.style.background = backgrounds[bgIndex];
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

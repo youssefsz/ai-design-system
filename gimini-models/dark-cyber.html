@@ -1,0 +1,252 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a retro-futuristic, cyberpunk "hacker terminal" dashboard or landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Data-heavy, dark web, cybersecurity, retro-terminal, glowing interfaces.
+- Typography: Strictly use a monospace font (e.g., 'JetBrains Mono' or 'Fira Code').
+- Colors: Pitch black/deep navy backgrounds (#030712). Text should be muted silver/gray for readability, with high-contrast, aggressive neon green (#34d399) or neon terminal colors for active elements, borders, and system text.
+- Effects & Styling:
+  - Text Shadows: Use distinct glowing text shadows on primary headers and active links to simulate CRT phosphor bleed.
+  - Box Shadows: Use inset and offset glowing neon shadows on panel borders.
+  - Scanlines: Include a fixed, full-screen CSS scanline overlay pattern with low opacity to simulate an old monitor.
+  - Glitch: Add slight CSS keyframe transform animations on hover for interactive elements mimicking digital interference/glitching.
+- Layout & Shapes: Hard angles, zero to very minimal border-radius. Use raw, thick-bordered grid panels structured like a tactical HUD or command-line interface. Use ASCII-bracket styling `[ LINK ]` for navigation.
+- UI Elements: Include pulsing CSS dots for network status indicators, simulated terminal prompts (root@...), and dense monospace data tables.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Null Sec Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #030712;
+            color: #d1d5db;
+        }
+
+        .neon-text {
+            color: #34d399;
+            text-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
+        }
+
+        .neon-border {
+            border: 1px solid #34d399;
+            box-shadow: 0 0 10px rgba(52, 211, 153, 0.2), inset 0 0 10px rgba(52, 211, 153, 0.1);
+        }
+
+        .neon-hover:hover {
+            background-color: rgba(52, 211, 153, 0.1);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.4), inset 0 0 15px rgba(52, 211, 153, 0.2);
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.1) 50%,
+                rgba(0, 0, 0, 0.1)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.3;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        .glitch-hover:hover {
+            animation: glitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #10b981;
+        }
+
+        .terminal-panel {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid #1f2937;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #34d399;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative overflow-x-hidden selection:bg-[#34d399] selection:text-[#030712]">
+    
+    <div class="scanlines"></div>
+
+    <!-- HUD Nav -->
+    <nav class="p-6 border-b border-gray-800 flex justify-between items-center bg-[#030712] sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <div class="w-3 h-3 bg-[#34d399] rounded-full animate-pulse"></div>
+            <div class="font-bold tracking-widest text-sm neon-text">SYS.NODE_01</div>
+        </div>
+        <div class="hidden md:flex gap-8 text-xs tracking-widest text-gray-400">
+            <a href="#" class="glitch-hover transition-colors">[ INIT ]</a>
+            <a href="#" class="glitch-hover transition-colors">[ PROTOCOLS ]</a>
+            <a href="#" class="glitch-hover transition-colors">[ UPLINK ]</a>
+        </div>
+        <div class="text-xs text-gray-500" id="clock">00:00:00</div>
+    </nav>
+
+    <!-- Main Grid -->
+    <main class="p-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+        
+        <!-- Primary Display -->
+        <div class="lg:col-span-8 terminal-panel neon-border p-8 min-h-[60vh] flex flex-col">
+            <div class="text-xs text-gray-500 mb-8 border-b border-gray-800 pb-2">
+                root@nullsec:~# ./execute_core.sh
+            </div>
+            
+            <div class="flex-grow flex flex-col justify-center">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+                    <span class="neon-text">HACK</span> THE<br>CONSTRUCT
+                </h1>
+                <p class="text-gray-400 max-w-lg text-sm leading-loose mb-10">
+                    Encrypted data streams routing through decentralized mesh nodes. Bypass proxy walls and interface directly with the raw feed. Complete anonymity guaranteed.
+                </p>
+                <div class="flex gap-4">
+                    <button class="neon-border neon-hover px-6 py-3 text-xs font-bold tracking-widest text-[#34d399] transition-all duration-300">
+                        > ESTABLISH CONNECTION
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Diagnostics -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            
+            <div class="terminal-panel p-6 border border-gray-800">
+                <div class="text-xs text-[#34d399] mb-4 tracking-widest">NETWORK STATUS</div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>LATENCY</span>
+                            <span class="text-white">12ms</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-1">
+                            <div class="bg-[#34d399] h-1 w-[12%]"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>PACKET LOSS</span>
+                            <span class="text-white">0.01%</span>
+                        </div>
+                        <div class="w-full bg-gray-900 h-1">
+                            <div class="bg-[#34d399] h-1 w-[2%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terminal-panel p-6 border border-gray-800 flex-grow">
+                <div class="text-xs text-[#34d399] mb-4 tracking-widest">LIVE LOGS</div>
+                <div class="text-xs text-gray-500 space-y-2 font-mono h-[200px] overflow-hidden" id="console">
+                    <div>[SYS] Mounting drive volumes... OK</div>
+                    <div>[NET] Establishing handshake TCP/IP... OK</div>
+                    <div>[SEC] Bypassing firewall node 7... PENDING</div>
+                    <div class="text-yellow-500">[WARN] Unauthorized access attempt blocked</div>
+                    <div>[SYS] Rerouting through proxy C...</div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Data Table Section -->
+    <section class="p-6 max-w-7xl mx-auto mt-6 mb-20">
+        <div class="terminal-panel border border-gray-800 p-8">
+            <h2 class="text-xl font-bold text-white mb-6 tracking-widest">ACTIVE NODES</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm whitespace-nowrap">
+                    <thead>
+                        <tr class="text-xs text-gray-500 border-b border-gray-800">
+                            <th class="pb-3 px-4 font-normal">NODE_ID</th>
+                            <th class="pb-3 px-4 font-normal">LOCATION</th>
+                            <th class="pb-3 px-4 font-normal">UPTIME</th>
+                            <th class="pb-3 px-4 font-normal text-right">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                            <td class="py-4 px-4 font-mono text-[#34d399]">NX-991A</td>
+                            <td class="py-4 px-4">EU-WEST (Frankfurt)</td>
+                            <td class="py-4 px-4">99.98%</td>
+                            <td class="py-4 px-4 text-right text-[#34d399]">ONLINE</td>
+                        </tr>
+                        <tr class="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
+                            <td class="py-4 px-4 font-mono text-[#34d399]">NX-342B</td>
+                            <td class="py-4 px-4">US-EAST (N. Virginia)</td>
+                            <td class="py-4 px-4">99.95%</td>
+                            <td class="py-4 px-4 text-right text-[#34d399]">ONLINE</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800/30 transition-colors opacity-50">
+                            <td class="py-4 px-4 font-mono text-red-400">NX-110C</td>
+                            <td class="py-4 px-4">AP-SOUTH (Mumbai)</td>
+                            <td class="py-4 px-4">82.10%</td>
+                            <td class="py-4 px-4 text-right text-red-500">OFFLINE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fake clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toISOString().split('T')[1].slice(0,-1);
+        }, 1000);
+
+        // Fake console logic
+        const consoleEl = document.getElementById('console');
+        const lines = [
+            "[SEC] Connection secured completely.",
+            "[NET] Ping reply from 192.168.1.1: bytes=32 time<1ms TTL=64",
+            "[SYS] Memory allocation expanded by 2048MB",
+            "[DATA] Scraping block matrix 0x889FA...",
+            "[NET] Packets received: 4124, lost: 0",
+            "<span class='text-white'>[ROOT] Terminal access granted.</span>"
+        ];
+        
+        let counter = 0;
+        setInterval(() => {
+            if (counter < lines.length) {
+                const newDiv = document.createElement('div');
+                newDiv.innerHTML = lines[counter];
+                consoleEl.appendChild(newDiv);
+                
+                // Remove oldest if more than 6 lines
+                if (consoleEl.children.length > 6) {
+                    consoleEl.removeChild(consoleEl.firstChild);
+                }
+                counter++;
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

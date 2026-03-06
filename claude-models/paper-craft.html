@@ -1,0 +1,369 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a "Paper Craft / Layered Depth" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Tactile, handmade, editorial. Like a premium printed brochure brought to the screen. Think Kinfolk magazine meets indie studio.
+- Typography: Use 'Fraunces' (optical-size serif with character) for expressive headings and 'Work Sans' for clean body copy. Headings should use variable optical sizing for warmth.
+- Colors: Warm off-white base (#faf8f5). Rich ink black (#1a1a1a) for text. Terracotta (#c2684a) and dusty sage (#8b9e7e) as accent colors. Muted gold (#c9a96e) for fine details.
+- Textures & Depth: Simulate layered paper by stacking cards with offset shadows that feel physical. Use subtle noise texture via CSS. Drop shadows should feel like real paper casting onto paper (warm-tinted, directional). No gloss, no glass.
+- Borders: Thin 1px borders in warm gray. Some elements use dashed borders for a hand-drawn feel.
+- Interactivity: Cards should subtly rotate on hover (1-2 degrees max) with a shadow shift, as if being picked up. Transitions should be organic (0.4s ease).
+- Layout: Asymmetric hero with text offset left and a stacked "paper" card element on the right. A masonry-style feature section below. Generous margins and padding throughout.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Craft | Layered Depth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#faf8f5',
+                        ink: '#1a1a1a',
+                        terracotta: '#c2684a',
+                        sage: '#8b9e7e',
+                        gold: '#c9a96e',
+                        warm: '#e8e2d9',
+                    },
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        body: ['Work Sans', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background: #faf8f5;
+            color: #1a1a1a;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .paper-card {
+            background: #ffffff;
+            border: 1px solid #e0dbd3;
+            box-shadow: 4px 6px 0px #e0dbd3;
+            transition: all 0.4s ease;
+        }
+
+        .paper-card:hover {
+            transform: rotate(-1deg) translateY(-4px);
+            box-shadow: 6px 10px 0px #d4cfc6, 8px 14px 20px rgba(26, 26, 26, 0.06);
+        }
+
+        .paper-stack {
+            position: relative;
+        }
+
+        .paper-stack::before,
+        .paper-stack::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #ffffff;
+            border: 1px solid #e0dbd3;
+            border-radius: inherit;
+        }
+
+        .paper-stack::before {
+            transform: rotate(2deg) translate(4px, 4px);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .paper-stack::after {
+            transform: rotate(4deg) translate(8px, 8px);
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        .dashed-border {
+            border: 1px dashed #c9a96e;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+        .stagger-4 { transition-delay: 400ms; }
+
+        .stamp {
+            display: inline-block;
+            border: 2px solid #1a1a1a;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transform: rotate(-3deg);
+        }
+
+        .tape {
+            position: relative;
+        }
+
+        .tape::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%) rotate(1deg);
+            width: 60px;
+            height: 16px;
+            background: rgba(201, 169, 110, 0.2);
+            border: 1px solid rgba(201, 169, 110, 0.3);
+        }
+
+        ::selection {
+            background: #c2684a;
+            color: #faf8f5;
+        }
+
+        .underline-sketch {
+            text-decoration: underline;
+            text-decoration-color: #c9a96e;
+            text-decoration-style: wavy;
+            text-underline-offset: 6px;
+        }
+    </style>
+</head>
+<body class="font-body antialiased">
+    <!-- Navigation -->
+    <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 lg:px-10">
+        <div class="flex items-center gap-3">
+            <div class="stamp text-ink">PC</div>
+            <span class="font-display text-lg font-semibold">Paper Craft</span>
+        </div>
+        <nav class="hidden gap-8 text-sm font-medium text-ink/50 md:flex">
+            <a href="#process" class="hover:text-ink transition-colors">Process</a>
+            <a href="#work" class="hover:text-ink transition-colors">Work</a>
+            <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+        </nav>
+        <a href="#contact" class="rounded-none border border-ink bg-ink px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-paper transition-all hover:bg-transparent hover:text-ink">
+            Inquire
+        </a>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-6 pb-32 lg:px-10">
+        <!-- Hero Section -->
+        <section class="grid gap-16 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-28">
+            <div class="reveal">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta mb-6">Studio Collection / 2026</p>
+                <h1 class="font-display text-5xl sm:text-6xl lg:text-[5.5rem] font-800 leading-[0.95] tracking-tight mb-8">
+                    Thoughtful design, <span class="italic font-normal underline-sketch">made by hand</span>.
+                </h1>
+                <p class="max-w-lg text-lg text-ink/50 leading-relaxed mb-10">
+                    Paper Craft celebrates the tactile quality of physical design brought into digital form.
+                    Every layer is intentional. Every shadow tells a story of depth.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="bg-ink text-paper px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all hover:bg-terracotta">
+                        View Collection
+                    </button>
+                    <button class="border border-ink/20 px-8 py-4 text-xs font-semibold uppercase tracking-widest transition-all hover:border-ink">
+                        Our Process
+                    </button>
+                </div>
+            </div>
+
+            <div class="reveal stagger-1">
+                <div class="paper-stack paper-card rounded-xl p-10">
+                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-gold mb-6">Featured note</p>
+                    <p class="font-display text-3xl leading-snug font-semibold italic mb-6">
+                        "The best interfaces feel like they were assembled by someone who cares about the details."
+                    </p>
+                    <div class="flex items-center gap-4 pt-6 border-t border-warm">
+                        <div class="h-10 w-10 rounded-full bg-sage/20 flex items-center justify-center font-display font-bold text-sage text-sm">
+                            YD
+                        </div>
+                        <div>
+                            <p class="text-sm font-semibold">Youssef Dhibi</p>
+                            <p class="text-xs text-ink/40">Design Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="py-16 lg:py-24">
+            <div class="mb-16 reveal">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-sage mb-4">How we work</p>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight">
+                    Layer by layer.
+                </h2>
+            </div>
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <article class="paper-card rounded-xl p-8 reveal stagger-1">
+                    <div class="dashed-border w-12 h-12 flex items-center justify-center mb-6 rounded-lg">
+                        <span class="font-display text-xl font-bold text-gold">01</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Research</h3>
+                    <p class="text-ink/50 leading-relaxed text-sm">
+                        We start with understanding. Interviews, competitive analysis, and contextual inquiry
+                        establish the foundation before a single pixel is placed.
+                    </p>
+                </article>
+
+                <article class="paper-card rounded-xl p-8 reveal stagger-2">
+                    <div class="dashed-border w-12 h-12 flex items-center justify-center mb-6 rounded-lg">
+                        <span class="font-display text-xl font-bold text-gold">02</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Composition</h3>
+                    <p class="text-ink/50 leading-relaxed text-sm">
+                        Types are set. Grids are drawn. Hierarchy emerges from deliberate arrangement,
+                        not decoration. Structure first, ornament never.
+                    </p>
+                </article>
+
+                <article class="paper-card rounded-xl p-8 reveal stagger-3">
+                    <div class="dashed-border w-12 h-12 flex items-center justify-center mb-6 rounded-lg">
+                        <span class="font-display text-xl font-bold text-gold">03</span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Refinement</h3>
+                    <p class="text-ink/50 leading-relaxed text-sm">
+                        Each iteration peels away excess. The final output is lean, focused,
+                        and communicates with precision. Nothing is left without purpose.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="py-16 lg:py-24">
+            <div class="grid gap-8 lg:grid-cols-[0.6fr_1fr] lg:items-start">
+                <div class="reveal lg:sticky lg:top-32">
+                    <p class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta mb-4">Selected Work</p>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+                        Projects with substance.
+                    </h2>
+                    <p class="text-ink/50 leading-relaxed">
+                        Each project is an exercise in restraint and thoughtfulness.
+                        We believe the best work speaks for itself without explanation.
+                    </p>
+                </div>
+
+                <div class="grid gap-6">
+                    <div class="paper-card rounded-xl p-10 reveal stagger-1">
+                        <div class="flex justify-between items-start mb-6">
+                            <p class="stamp text-terracotta border-terracotta">Identity</p>
+                            <p class="text-xs text-ink/30 font-medium">2026</p>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3">Willow & Stone</h3>
+                        <p class="text-ink/50 text-sm leading-relaxed">
+                            Complete brand identity for a sustainable architecture firm. Earthy color systems,
+                            weighted typographic scales, and a physical-first design language.
+                        </p>
+                    </div>
+
+                    <div class="paper-card rounded-xl p-10 reveal stagger-2">
+                        <div class="flex justify-between items-start mb-6">
+                            <p class="stamp text-sage border-sage">Editorial</p>
+                            <p class="text-xs text-ink/30 font-medium">2025</p>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3">Margin Notes</h3>
+                        <p class="text-ink/50 text-sm leading-relaxed">
+                            A digital publication platform designed for long reads. Quiet typography,
+                            generous margins, and a reading experience that respects attention.
+                        </p>
+                    </div>
+
+                    <div class="paper-card rounded-xl p-10 reveal stagger-3">
+                        <div class="flex justify-between items-start mb-6">
+                            <p class="stamp text-gold border-gold">Product</p>
+                            <p class="text-xs text-ink/30 font-medium">2025</p>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-3">Grain & Thread</h3>
+                        <p class="text-ink/50 text-sm leading-relaxed">
+                            E-commerce experience for a handmade textile brand. Every interaction
+                            communicates craft. Every surface has weight.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 lg:py-24 reveal">
+            <div class="paper-card tape rounded-xl p-12 lg:p-20 text-center">
+                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-gold mb-6 mt-4">Get in touch</p>
+                <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight mb-6">
+                    Let us build something worth keeping.
+                </h2>
+                <p class="mx-auto max-w-lg text-ink/50 leading-relaxed mb-10">
+                    We take on a limited number of projects each year to ensure the quality of our work
+                    remains uncompromised. Start a conversation today.
+                </p>
+                <a href="mailto:hello@papercraft.studio" class="inline-block bg-ink text-paper px-10 py-4 text-xs font-semibold uppercase tracking-widest transition-all hover:bg-terracotta">
+                    hello@papercraft.studio
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-warm">
+        <div class="mx-auto max-w-6xl px-6 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 lg:px-10">
+            <div class="flex items-center gap-3">
+                <div class="stamp text-ink text-[8px]">PC</div>
+                <span class="font-display text-sm font-semibold">Paper Craft</span>
+            </div>
+            <p class="text-xs text-ink/30">
+                2026 Paper Craft Studio. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach((el) => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

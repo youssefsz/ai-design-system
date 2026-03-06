@@ -1,0 +1,309 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create an ultra-minimal, technical "Architectural Mono" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Clinical, exact, tech-infrastructure, restrained, highly calculated.
+- Typography: Use a prominent monospace font (e.g., 'IBM Plex Mono') for all tags, buttons, metrics, and navigation. Pair with a clear, neutral grotesque (e.g., 'IBM Plex Sans') for large headings and body copy.
+- Colors: Fog/Light Gray background (`#efefea`). Slate/Charcoal text (`#131313`). Use exactly ONE aggressive, artificial accent color sparingly (e.g., acid lime `#d8ff68`).
+- Grid/Background: Use a visible, precise 64px graph-paper grid in the background using CSS linear-gradients (`rgba(19, 19, 19, 0.04)`).
+- Shapes & Borders: Absolutely zero border-radius (`rounded-none`). Use sharp, thin (1px) borders to define containers. Use frosted glass panels (`backdrop-filter: blur(12px)`) instead of heavy solid cards. 
+- Interactions: Keep animations fast and utilitarian. Small 2px lifts on hover. Buttons should invert their colors (black background, light text) sharply on hover.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architect Mono | Minimal System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fog: '#efefea',
+            slate: '#131313',
+            wire: '#7b7b74',
+            lime: '#d8ff68'
+          },
+          fontFamily: {
+            display: ['IBM Plex Sans', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --fog: #efefea;
+      --slate: #131313;
+      --wire: #7b7b74;
+      --lime: #d8ff68;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(19, 19, 19, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19, 19, 19, 0.04) 1px, transparent 1px),
+        #f5f5f0;
+      background-size: 64px 64px;
+    }
+
+    ::selection {
+      background: var(--lime);
+      color: var(--slate);
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(19, 19, 19, 0.1);
+    }
+
+    .meter-bar {
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 100ms; }
+    .stagger-2 { transition-delay: 200ms; }
+    .stagger-3 { transition-delay: 300ms; }
+
+    .btn-mono {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn-mono:hover {
+      background: var(--slate);
+      color: var(--fog);
+      transform: translateY(-2px);
+    }
+
+    .btn-mono::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--slate);
+      transition: all 0.3s ease;
+    }
+
+    .btn-mono:hover::after {
+      inset: -4px;
+      opacity: 0;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        background-size: 32px 32px;
+      }
+    }
+  </style>
+</head>
+<body class="font-display text-slate antialiased">
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-6 py-8 lg:px-10">
+    <div>
+      <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">Architect Mono</p>
+    </div>
+    <nav class="hidden gap-12 font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-wire md:flex">
+      <a href="#principles" class="hover:text-slate transition-colors">Principles</a>
+      <a href="#modules" class="hover:text-slate transition-colors">Modules</a>
+      <a href="#contact" class="hover:text-slate transition-colors">Contact</a>
+    </nav>
+    <a href="#contact" class="btn-mono px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-[0.3em] border border-slate/20">
+      Request Draft
+    </a>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <!-- Hero section -->
+    <section class="grid gap-16 border-t border-slate/10 pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:pt-24">
+      <div class="reveal">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire mb-6">Minimal landing page direction</p>
+        <h1 class="font-display text-6xl font-bold leading-[0.9] tracking-tight sm:text-7xl lg:text-[7.2rem]">
+          Reduction as a <span class="text-wire font-light italic">strategy</span>, not a lack of ideas.
+        </h1>
+        <p class="mt-8 max-w-xl text-xl leading-relaxed text-slate/60">
+          Architect Mono uses visible alignment, restrained color, and technical typography to make the product feel deliberate, disciplined, and exact.
+        </p>
+      </div>
+      <div class="reveal stagger-1 panel p-8">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire mb-8">Clarity Performance</p>
+        <div class="space-y-8">
+          <div>
+            <div class="mb-3 flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span>Messaging</span>
+              <span id="metricMessaging">84%</span>
+            </div>
+            <div class="h-[3px] w-full bg-slate/10">
+              <div id="barMessaging" class="meter-bar h-full bg-slate" style="width: 84%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="mb-3 flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span>Structure</span>
+              <span id="metricStructure">91%</span>
+            </div>
+            <div class="h-[3px] w-full bg-slate/10">
+              <div id="barStructure" class="meter-bar h-full bg-lime" style="width: 91%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="mb-3 flex items-center justify-between font-mono text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span>Trust</span>
+              <span id="metricTrust">88%</span>
+            </div>
+            <div class="h-[3px] w-full bg-slate/10">
+              <div id="barTrust" class="meter-bar h-full bg-slate" style="width: 88%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles Section -->
+    <section id="principles" class="grid gap-6 py-20 lg:grid-cols-3 lg:py-32">
+      <article class="reveal stagger-1 panel p-10 hover:border-slate/30 transition-colors group">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">01 Grid</p>
+        <h2 class="mt-6 text-3xl font-bold tracking-tight">Measured spacing</h2>
+        <p class="mt-6 text-lg leading-relaxed text-slate/60">Layout decisions are visible and repeatable. That consistency makes the brand look more rigorous.</p>
+        <div class="mt-8 h-px w-0 bg-slate group-hover:w-full transition-all duration-700"></div>
+      </article>
+
+      <article class="reveal stagger-2 panel p-10 hover:border-slate/30 transition-colors group">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">02 Type</p>
+        <h2 class="mt-6 text-3xl font-bold tracking-tight">Plain but precise</h2>
+        <p class="mt-6 text-lg leading-relaxed text-slate/60">Monospaced labels and straightforward sans headlines create a technical tone without becoming cold.</p>
+        <div class="mt-8 h-px w-0 bg-slate group-hover:w-full transition-all duration-700"></div>
+      </article>
+
+      <article class="reveal stagger-3 panel p-10 hover:border-slate/30 transition-colors group">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">03 Accent</p>
+        <h2 class="mt-6 text-3xl font-bold tracking-tight">One highlight</h2>
+        <p class="mt-6 text-lg leading-relaxed text-slate/60">The lime accent is rare enough to carry meaning. It marks the moments that matter and nothing else.</p>
+        <div class="mt-8 h-px w-0 bg-lime group-hover:w-full transition-all duration-700"></div>
+      </article>
+    </section>
+
+    <!-- Content Blocks -->
+    <section id="modules" class="grid gap-12 border-t border-slate/10 py-20 lg:grid-cols-[0.9fr_1.1fr] lg:py-32">
+      <div class="reveal">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">Application</p>
+        <h3 class="mt-6 text-4xl font-bold leading-tight sm:text-6xl tracking-tight">
+          A strong fit for <span class="italic">infrastructure</span> and technical tools.
+        </h3>
+        <p class="mt-8 max-w-sm text-lg text-slate/50">Designed for brands that prefer proof over promises. Reduction as a competitive advantage.</p>
+      </div>
+      <div class="grid gap-6">
+        <div class="reveal stagger-1 bg-slate p-10 text-fog">
+          <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-fog/40">Module set v1.0</p>
+          <p class="mt-8 text-2xl font-medium leading-relaxed">
+            Hero, system summary, capability grid, operational proof, process strip, and final conversion panel.
+          </p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="reveal stagger-2 panel p-10">
+            <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">Tone</p>
+            <p class="mt-6 text-xl font-bold">Quietly premium</p>
+            <p class="mt-2 text-sm text-slate/50">Restraint with confidence.</p>
+          </div>
+          <div class="reveal stagger-3 bg-lime p-10 text-slate">
+            <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-slate/40">Result</p>
+            <p class="mt-6 text-xl font-bold">Sharper focus</p>
+            <p class="mt-2 text-sm text-slate/60">Immediate comprehension.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t border-slate/10 bg-white/40 pt-16 pb-8 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl flex-col gap-12 px-6 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+      <div class="max-w-md">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">Architect Mono</p>
+        <p class="mt-6 text-xl font-medium text-slate/80">Minimal direction for teams that want restraint with clinical confidence.</p>
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-wire">Operations</p>
+        <button id="simulateMetrics" class="btn-mono px-8 py-4 font-mono text-[10px] font-bold uppercase tracking-[0.3em] bg-slate text-fog">
+          Refresh Analytics
+        </button>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 mt-16 pt-8 border-t border-slate/5 text-[9px] font-bold uppercase tracking-[0.4em] text-wire lg:px-10">
+      &copy; 2026 Architect Mono Design. Ver 2.0.4.
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // Metric Simulation
+    const values = {
+      messaging: [84, 79, 92, 85],
+      structure: [91, 87, 95, 89],
+      trust: [88, 83, 90, 86]
+    };
+    let index = 0;
+
+    const updateMetrics = () => {
+      index = (index + 1) % values.messaging.length;
+      
+      const mVal = values.messaging[index];
+      const sVal = values.structure[index];
+      const tVal = values.trust[index];
+
+      document.getElementById('metricMessaging').innerText = mVal + '%';
+      document.getElementById('metricStructure').innerText = sVal + '%';
+      document.getElementById('metricTrust').innerText = tVal + '%';
+
+      document.getElementById('barMessaging').style.width = mVal + '%';
+      document.getElementById('barStructure').style.width = sVal + '%';
+      document.getElementById('barTrust').style.width = tVal + '%';
+    };
+
+    document.getElementById('simulateMetrics').addEventListener('click', updateMetrics);
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Design Lab | Youssef Dhibi</title>
+
+    <!-- Standard SEO -->
+    <meta name="description" content="A comparative showcase of landing pages generated across different AI models. Experimental frontend designs utilizing Gemini and GPT architectures, created by Youssef Dhibi.">
+    <meta name="keywords" content="Frontend Design, AI Models, Gemini, GPT, Youssef Dhibi, Web Development, UI/UX, Design System, Landing Pages">
+    <meta name="author" content="Youssef Dhibi">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-design-system.youssef.tn/">
+    <meta property="og:title" content="Frontend Design Lab | Youssef Dhibi">
+    <meta property="og:description" content="A comparative showcase of landing pages generated across different AI models by Youssef Dhibi.">
+    <meta property="og:image" content="https://ai-design-system.youssef.tn/splash.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ai-design-system.youssef.tn/">
+    <meta name="twitter:title" content="Frontend Design Lab | Youssef Dhibi">
+    <meta name="twitter:description" content="A comparative showcase of landing pages generated across different AI models by Youssef Dhibi.">
+    <meta name="twitter:image" content="https://ai-design-system.youssef.tn/splash.png">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="./assets/favicons/favicon.ico">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Frontend Design Lab",
+      "url": "https://ai-design-system.youssef.tn/",
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Dhibi",
+        "url": "http://dhibi.tn"
+      },
+      "description": "A comparative showcase of landing pages generated across different AI models.",
+      "image": "https://ai-design-system.youssef.tn/splash.png"
+    }
+    </script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#050505',
+                        surface: '#111111',
+                        border: '#2a2a2a',
+                        primary: '#ededed',
+                        secondary: '#888888',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/main.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-background text-primary font-sans antialiased min-h-screen selection:bg-white selection:text-black">
+
+    <!-- Top Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+        <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="./assets/logo/logo.png" alt="Logo" class="h-10 w-auto" loading="lazy">
+            </div>
+            <div class="flex items-center gap-6">
+                <!-- Links (hidden on mobile) -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#gemini" class="text-sm text-secondary hover:text-primary transition-colors">Gemini Series</a>
+                    <a href="#gpt" class="text-sm text-secondary hover:text-primary transition-colors">GPT Series</a>
+                    <a href="#claude" class="text-sm text-secondary hover:text-primary transition-colors">Claude Series</a>
+                    <a href="https://github.com/youssefsz/ai-design-system" target="_blank" rel="noopener noreferrer" class="text-secondary hover:text-primary transition-colors" aria-label="GitHub Repository">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center text-secondary hover:text-primary focus:outline-none" aria-label="Toggle Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[100] pointer-events-none md:hidden">
+        <!-- Backdrop -->
+        <div id="mobile-backdrop" class="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+        <!-- Right-side Drawer -->
+        <div id="mobile-drawer" class="absolute top-0 right-0 h-full w-64 bg-surface border-l border-border transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto flex flex-col p-6 shadow-2xl">
+            <div class="flex justify-end mb-8">
+                <button id="mobile-close-btn" class="text-secondary hover:text-primary focus:outline-none" aria-label="Close Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6">
+                <a href="#gemini" class="mobile-link text-lg text-secondary hover:text-primary transition-colors font-medium">Gemini Series</a>
+                <a href="#gpt" class="mobile-link text-lg text-secondary hover:text-primary transition-colors font-medium">GPT Series</a>
+                <a href="#claude" class="mobile-link text-lg text-secondary hover:text-primary transition-colors font-medium">Claude Series</a>
+                <a href="https://github.com/youssefsz/ai-design-system" target="_blank" rel="noopener noreferrer" class="mobile-link text-lg text-secondary hover:text-primary transition-colors font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="pt-32 pb-24 px-6">
+        <!-- Hero Section -->
+        <section class="max-w-[1400px] mx-auto mb-32 reveal-on-load flex flex-col items-center text-center">
+            <div class="max-w-3xl flex flex-col items-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-surface text-xs font-mono text-secondary mb-6 block-reveal">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    AI Model Evaluation
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-medium tracking-tight mb-8 text-balance block-reveal stagger-1">
+                    Evaluating AI models in frontend design.
+                </h1>
+                <p class="text-lg sm:text-xl text-secondary leading-relaxed max-w-2xl font-light block-reveal stagger-2 px-4 sm:px-0">
+                    A comparative showcase of landing pages generated across different models. Analyzing distinct design aesthetics to visualize which AI produces the best layouts and user interfaces.
+                </p>
+                <a href="https://github.com/youssefsz/ai-design-system" target="_blank" rel="noopener noreferrer" class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 bg-white/[0.06] hover:bg-white/[0.12] text-sm text-primary hover:text-white transition-all duration-200 block-reveal stagger-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    View on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Gemini Series -->
+        <section id="gemini" class="max-w-[1400px] mx-auto mb-32 pt-16 scroll-mt-16">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 border-b border-border pb-6 reveal gap-4 sm:gap-0">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-medium mb-2">The Gemini Experiments <span class="text-lg sm:text-xl text-secondary block sm:inline mt-1 sm:mt-0">(Gemini 3.1)</span></h2>
+                    <p class="text-sm sm:text-base text-secondary font-light">Explorations generated utilizing the Gemini architecture.</p>
+                </div>
+                <div class="text-mono text-xs text-secondary mt-2 sm:mt-0 bg-surface/50 px-3 py-1.5 rounded-full border border-border/50 inline-block self-start sm:self-auto">
+                    [ 06 EXECUTIONS ]
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gemini-grid">
+                <!-- Javascript will inject portfolio cards here -->
+            </div>
+        </section>
+
+        <!-- GPT Series -->
+        <section id="gpt" class="max-w-[1400px] mx-auto mb-24 pt-16 scroll-mt-16">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 border-b border-border pb-6 reveal gap-4 sm:gap-0">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-medium mb-2">The GPT Experiments <span class="text-lg sm:text-xl text-secondary block sm:inline mt-1 sm:mt-0">(GPT 5.4)</span></h2>
+                    <p class="text-sm sm:text-base text-secondary font-light">Explorations generated utilizing the GPT architecture.</p>
+                </div>
+                <div class="text-mono text-xs text-secondary mt-2 sm:mt-0 bg-surface/50 px-3 py-1.5 rounded-full border border-border/50 inline-block self-start sm:self-auto">
+                    [ 06 EXECUTIONS ]
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gpt-grid">
+                <!-- Javascript will inject portfolio cards here -->
+            </div>
+        </section>
+
+        <!-- Claude Series -->
+        <section id="claude" class="max-w-[1400px] mx-auto mb-24 pt-16 scroll-mt-16">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 border-b border-border pb-6 reveal gap-4 sm:gap-0">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-medium mb-2">The Claude Experiments <span class="text-lg sm:text-xl text-secondary block sm:inline mt-1 sm:mt-0">(Claude Opus 4.6)</span></h2>
+                    <p class="text-sm sm:text-base text-secondary font-light">Explorations generated utilizing the Claude architecture.</p>
+                </div>
+                <div class="text-mono text-xs text-secondary mt-2 sm:mt-0 bg-surface/50 px-3 py-1.5 rounded-full border border-border/50 inline-block self-start sm:self-auto">
+                    [ 06 EXECUTIONS ]
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="claude-grid">
+                <!-- Javascript will inject portfolio cards here -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-border mt-auto">
+        <div class="max-w-[1400px] mx-auto px-6 py-8 flex flex-col items-center justify-center gap-4">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <p class="text-sm text-secondary font-light">
+                    Created with <span class="text-red-400">&hearts;</span> by <a href="http://dhibi.tn" target="_blank" class="text-primary hover:underline underline-offset-4 decoration-border">Youssef Dhibi</a>
+                </p>
+                <a href="https://github.com/youssefsz/ai-design-system" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/20 bg-white/[0.06] hover:bg-white/[0.12] text-xs text-primary hover:text-white transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Open Source
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

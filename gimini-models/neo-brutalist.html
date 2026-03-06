@@ -1,0 +1,160 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a bold "Neo-Brutalist" agency or portfolio landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Rebellious, raw, high-contrast, trendy startup/agency, unapologetic.
+- Typography: Use a striking grotesque/geometric font (e.g., 'Space Grotesk'). Rely heavily on uppercase lettering and `tracking-tighter` for massive, bold hero headlines.
+- Colors: Use a muted vintage-web background (like cream/off-white `#f4f4f0`). Use pure black (`#0f172a` or `#000`) for text, borders, and shadows. For accents, use pastel but highly saturated flat colors (e.g., retro yellow `#fcd34d`, salmon pink `#fca5a5`, mint green `#a7f3d0`, baby blue `#bfdbfe`).
+- Core Brutalist Effects:
+  - Borders: Absolutely everything (containers, buttons, badges, navbars) should have thick, solid, dark borders (2px or 3px solid black).
+  - Shadows: DO NOT use soft blurry Box Shadows. Use hard, solid offset drop-shadows (e.g., `box-shadow: 6px 6px 0px #000;`).
+  - Interactions: On hover, interactable elements should physically shift up and to the left (`translate(-4px, -4px)`) while extending their hard shadow (to 10px offset).
+- Layout & Elements: Include bold marquees with scrolling text, pill-shaped badges, and stark grid layouts. Avoid soft gradients and blur effects entirely. Keep UI elements raw and geometric.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo Brutalist Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f4f4f0;
+            color: #0f172a;
+        }
+
+        .brutal-shadow {
+            box-shadow: 6px 6px 0px #0f172a;
+            border: 3px solid #0f172a;
+            transition: all 0.2s ease;
+        }
+
+        .brutal-shadow:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px #0f172a;
+        }
+
+        .brutal-shadow-static {
+            box-shadow: 8px 8px 0px #0f172a;
+            border: 3px solid #0f172a;
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 3px solid #0f172a;
+            border-bottom: 3px solid #0f172a;
+            background: #fcd34d;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .badge {
+            border: 2px solid #0f172a;
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="p-6 flex justify-between items-center border-b-3 border-black">
+        <div class="text-2xl font-bold tracking-tighter uppercase">Studio X</div>
+        <div class="hidden md:flex gap-8 font-semibold">
+            <a href="#" class="hover:underline decoration-2 underline-offset-4">Work</a>
+            <a href="#" class="hover:underline decoration-2 underline-offset-4">Services</a>
+            <a href="#" class="hover:underline decoration-2 underline-offset-4">Culture</a>
+        </div>
+        <button class="bg-[#a7f3d0] brutal-shadow px-6 py-2 font-bold uppercase rounded-md cursor-pointer">
+            Let's Talk
+        </button>
+    </nav>
+
+    <!-- Marquee -->
+    <div class="marquee-container py-3">
+        <div class="marquee-content text-xl font-bold uppercase tracking-wider">
+            Bold moves only * No compromises * Design with impact * Disrupt the norm * Bold moves only * No compromises * Design with impact * Disrupt the norm * 
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <main class="flex-grow flex flex-col justify-center items-center text-center px-4 py-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-[#fca5a5] badge mb-8 brutal-shadow-static">
+                <span>New Release</span>
+            </div>
+            <h1 class="text-7xl md:text-9xl font-bold tracking-tighter uppercase leading-none mb-6">
+                Radical<br>Systems
+            </h1>
+            <p class="text-xl md:text-2xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
+                We build digital experiences that refuse to be ignored. Stand out or step aside.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-[#bfdbfe] brutal-shadow px-8 py-4 text-xl font-bold uppercase rounded-md cursor-pointer">
+                    View Projects
+                </button>
+                <button class="bg-white brutal-shadow px-8 py-4 text-xl font-bold uppercase rounded-md cursor-pointer">
+                    Our Process
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Services Grid -->
+    <section class="p-6 md:p-12 border-t-3 border-black bg-[#e0e7ff]">
+        <h2 class="text-5xl font-bold uppercase mb-12 border-b-3 border-black pb-4 inline-block">Capabilities</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 brutal-shadow rounded-md">
+                <div class="bg-[#fcd34d] w-12 h-12 rounded-full border-2 border-black mb-6"></div>
+                <h3 class="text-2xl font-bold uppercase mb-4">Brand Identity</h3>
+                <p class="font-medium text-lg leading-relaxed">Crafting visceral visual languages that command attention and drive recognition.</p>
+            </div>
+            <div class="bg-[#fca5a5] p-8 brutal-shadow rounded-md">
+                <div class="bg-black w-12 h-12 rounded-none border-2 border-black mb-6"></div>
+                <h3 class="text-2xl font-bold uppercase mb-4">Web Engineering</h3>
+                <p class="font-medium text-lg leading-relaxed">Building robust, high-performance platforms with uncompromising architecture.</p>
+            </div>
+            <div class="bg-white p-8 brutal-shadow rounded-md">
+                <div class="bg-[#a7f3d0] w-12 h-12 rounded-sm border-2 border-black mb-6 rotate-45 transform origin-center"></div>
+                <h3 class="text-2xl font-bold uppercase mb-4">Motion Design</h3>
+                <p class="font-medium text-lg leading-relaxed">Adding kinetic energy to digital touchpoints to guide user behavior.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-12 bg-black text-white border-t-3 border-black flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-4xl font-bold tracking-tighter uppercase">Studio X</div>
+        <div class="text-lg font-medium">Montreal, QC</div>
+        <div class="flex gap-6 font-bold uppercase">
+            <a href="#" class="hover:text-[#fca5a5] transition-colors">Twitter</a>
+            <a href="#" class="hover:text-[#fcd34d] transition-colors">Instagram</a>
+            <a href="#" class="hover:text-[#a7f3d0] transition-colors">Dribbble</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple hover listener for interaction logging
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                console.log('Button hovered in brutalist template');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a loud, unpolished "Neo-Brutalist / Constructivist" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Loud, rebellious, physical, agency/startup, "decision-making" design.
+- Typography: Use an aggressively wide, heavy display font for headings (e.g., 'Archivo Expanded' uppercase). Pair with a quirky neo-grotesque for body copy (e.g., 'Space Grotesk').
+- Colors: Vintage paper/beige background (`#f2eee8`). Pure black (`#111111`) for text and heavy outlines. Highly saturated, solid primary-like accents like safety orange (`#ee5635`), bright yellow (`#f7d66d`), and mint green (`#a0d7c8`).
+- Borders & Shadows: Everything must have thick, 4px solid black borders. Never use soft or blurred drop-shadows; use heavy, solid, offset black shadows (e.g., `box-shadow: 10px 10px 0 #111111`).
+- Shapes: Sharp 90-degree corners only. Zero border-radius anywhere.
+- Interactions & Elements: Include endless scrolling marquee/ticker tapes. Buttons should physically "depress" on active click by translating down/right and reducing their hard box-shadow.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signal Office | Bold Grid</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Archivo+Expanded:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#f2eee8',
+            carbon: '#111111',
+            alert: '#ee5635',
+            sun: '#f7d66d',
+            mint: '#a0d7c8'
+          },
+          fontFamily: {
+            display: ['Archivo Expanded', 'sans-serif'],
+            body: ['Space Grotesk', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --alert: #ee5635;
+      --paper: #f2eee8;
+      --carbon: #111111;
+    }
+
+    body {
+      background-color: var(--paper);
+      background-image: 
+        linear-gradient(135deg, rgba(238, 86, 53, 0.05) 0%, transparent 40%),
+        linear-gradient(225deg, rgba(247, 214, 109, 0.05) 0%, transparent 40%);
+      color: var(--carbon);
+      overflow-x: hidden;
+    }
+
+    .brutalist-border {
+      border: 4px solid var(--carbon);
+    }
+
+    .brutalist-shadow {
+      box-shadow: 10px 10px 0 var(--carbon);
+      transition: all 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    }
+
+    .brutalist-shadow:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 14px 14px 0 var(--carbon);
+    }
+
+    .brutalist-shadow:active {
+      transform: translate(2px, 2px);
+      box-shadow: 6px 6px 0 var(--carbon);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: fit-content;
+      animation: ticker 30s linear infinite;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-1 { transition-delay: 100ms; }
+    .stagger-2 { transition-delay: 200ms; }
+    .stagger-3 { transition-delay: 300ms; }
+
+    .btn-brutalist {
+      font-family: 'Archivo Expanded', sans-serif;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 1rem 1.5rem;
+      border: 4px solid var(--carbon);
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .accent-alert { background-color: var(--alert); }
+    .accent-sun { background-color: var(--sun); }
+    .accent-mint { background-color: var(--mint); }
+
+    ::selection {
+      background: var(--alert);
+      color: var(--paper);
+    }
+  </style>
+</head>
+<body class="font-body antialiased">
+  <!-- Ticker Banner -->
+  <div class="fixed top-0 left-0 right-0 z-50 border-b-4 border-carbon bg-alert py-3 text-[10px] font-bold uppercase tracking-[0.4em] text-paper pointer-events-none">
+    <div class="ticker-track whitespace-nowrap">
+      <span class="px-8">Signal Office builds launch systems for teams that need a stronger point of view.</span>
+      <span class="px-8">Signal Office builds launch systems for teams that need a stronger point of view.</span>
+      <span class="px-8">Signal Office builds launch systems for teams that need a stronger point of view.</span>
+      <span class="px-8">Signal Office builds launch systems for teams that need a stronger point of view.</span>
+    </div>
+  </div>
+
+  <header class="mx-auto flex max-w-7xl items-center justify-between px-6 pt-24 pb-12 lg:px-10">
+    <div class="brutalist-border bg-paper px-6 py-3 brutalist-shadow text-[11px] font-extrabold uppercase tracking-[0.4em]">
+      Signal Office
+    </div>
+    <nav class="hidden gap-10 text-[11px] font-extrabold uppercase tracking-[0.3em] md:flex">
+      <a href="#system" class="hover:text-alert transition-colors">System</a>
+      <a href="#results" class="hover:text-alert transition-colors">Results</a>
+      <a href="#contact" class="hover:text-alert transition-colors">Contact</a>
+    </nav>
+    <a href="#contact" class="btn-brutalist bg-carbon text-paper brutalist-shadow text-xs">
+      Start Project
+    </a>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-6 pb-24 lg:px-10 lg:pb-32">
+    <!-- Hero Section -->
+    <section class="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center py-16">
+      <div class="reveal">
+        <p class="text-xs font-extrabold uppercase tracking-[0.4em] text-alert mb-6">Hard-edged landing page direction</p>
+        <h1 class="font-display text-5xl sm:text-7xl lg:text-[7.5rem] uppercase leading-[0.9] tracking-tighter">
+          Design that acts like a <span class="bg-sun px-2">Decision.</span>
+        </h1>
+        <p class="mt-10 max-w-xl text-xl font-medium leading-relaxed text-carbon/80">
+          Signal Office leans into contrast, oversized type, and thick outlines for teams that want presence without the typical corporate polish.
+        </p>
+        <div class="mt-12 flex flex-wrap gap-6">
+          <a href="#results" class="btn-brutalist bg-alert text-paper brutalist-shadow text-xs">
+            See Projects
+          </a>
+          <button id="paletteToggle" class="btn-brutalist bg-paper brutalist-shadow text-xs">
+            Switch Tone
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-6">
+        <div class="brutalist-border bg-paper p-8 brutalist-shadow reveal stagger-1">
+          <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-carbon/40 mb-8">Capability metrics</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="brutalist-border bg-sun p-5">
+              <p class="text-4xl font-display">04</p>
+              <p class="mt-2 text-[9px] font-extrabold uppercase tracking-widest leading-tight">Strong modules</p>
+            </div>
+            <div class="brutalist-border bg-mint p-5">
+              <p class="text-4xl font-display">09</p>
+              <p class="mt-2 text-[9px] font-extrabold uppercase tracking-widest leading-tight">Conversion pts</p>
+            </div>
+            <div class="brutalist-border bg-paper p-5 col-span-2">
+              <p class="text-4xl font-display">1 Week</p>
+              <p class="mt-2 text-[9px] font-extrabold uppercase tracking-widest leading-tight">Prototype Cycle</p>
+            </div>
+          </div>
+        </div>
+        <div class="brutalist-border bg-carbon p-8 text-paper brutalist-shadow reveal stagger-2">
+          <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-paper/40 mb-4">Positioning note</p>
+          <p class="text-xl font-bold leading-relaxed">
+            Best for launches that need edge, speed, and recall. Not built to disappear into the noise.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services / Steps -->
+    <section id="system" class="grid gap-6 py-20 lg:grid-cols-3 lg:py-32">
+      <article class="reveal stagger-1 brutalist-border bg-paper p-10 brutalist-shadow">
+        <p class="text-xs font-extrabold uppercase tracking-[0.4em] text-alert">01</p>
+        <h2 class="mt-6 font-display text-3xl uppercase leading-none">Frame the offer</h2>
+        <p class="mt-6 text-lg font-medium leading-relaxed text-carbon/70">We cut the messaging to a direct proposition so the design hit with force instead of explaining itself.</p>
+      </article>
+
+      <article class="reveal stagger-2 brutalist-border bg-paper p-10 brutalist-shadow">
+        <p class="text-xs font-extrabold uppercase tracking-[0.4em] text-alert">02</p>
+        <h2 class="mt-6 font-display text-3xl uppercase leading-none">Visible structure</h2>
+        <p class="mt-6 text-lg font-medium leading-relaxed text-carbon/70">Heavy dividers, rigid card systems, and repeated motion create a clear physicality across the landing page.</p>
+      </article>
+
+      <article class="reveal stagger-3 brutalist-border bg-paper p-10 brutalist-shadow">
+        <p class="text-xs font-extrabold uppercase tracking-[0.4em] text-alert">03</p>
+        <h2 class="mt-6 font-display text-3xl uppercase leading-none">Push the close</h2>
+        <p class="mt-6 text-lg font-medium leading-relaxed text-carbon/70">Direct CTA blocks, strong proof, and no excess softness keep the final conversion path completely obvious.</p>
+      </article>
+    </section>
+
+    <!-- Featured Section -->
+    <section id="results" class="grid gap-6 border-t-4 border-carbon pt-20 pb-12 lg:grid-cols-2 lg:pt-32">
+      <div class="reveal brutalist-border bg-carbon p-10 text-paper brutalist-shadow">
+        <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-paper/40 mb-6">Featured rollout</p>
+        <h3 class="font-display text-5xl uppercase leading-[0.9] tracking-tighter">Margin House</h3>
+        <p class="mt-10 text-xl font-medium leading-relaxed text-paper/80">
+          A fintech launch that replaced soft SaaS cues with decisive hierarchy, louder contrast, and a more memorable sales path.
+        </p>
+      </div>
+      <div class="flex flex-col gap-6">
+        <div class="reveal stagger-1 brutalist-border bg-sun p-10 brutalist-shadow flex-1">
+          <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-carbon/40 mb-6">Outcome</p>
+          <p class="text-3xl font-display uppercase leading-none">Higher quality demos with zero hesitation.</p>
+        </div>
+        <div class="reveal stagger-2 brutalist-border bg-mint p-10 brutalist-shadow flex-1">
+          <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-carbon/40 mb-6">Strategy</p>
+          <p class="text-xl font-bold leading-relaxed">
+            The visual system looked committed. That made the offer feel established.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="border-t-4 border-carbon bg-paper py-20">
+    <div class="mx-auto flex max-w-7xl flex-col gap-12 px-6 lg:flex-row lg:items-end lg:justify-between lg:px-10">
+      <div class="max-w-2xl">
+        <p class="text-[10px] font-extrabold uppercase tracking-[0.4em] text-alert">Signal Office</p>
+        <h4 class="mt-8 font-display text-4xl sm:text-6xl uppercase leading-[0.9] tracking-tighter">
+          Built for founders that want design with sharper edges.
+        </h4>
+      </div>
+      <div>
+        <a href="mailto:signal@office.example" class="btn-brutalist bg-alert text-paper brutalist-shadow text-lg flex items-center gap-4">
+          signal@office.example
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 mt-20 pt-10 border-t-4 border-carbon text-[10px] font-extrabold uppercase tracking-[0.4em] lg:px-10">
+      &copy; 2026 Signal Office Brutalist Group.
+    </div>
+  </footer>
+
+  <script>
+    // Reveal Observer
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach((item) => observer.observe(item));
+
+    // Palette Toggle
+    const palettes = [
+      { alert: '#ee5635', sun: '#f7d66d', mint: '#a0d7c8' },
+      { alert: '#2563eb', sun: '#86efac', mint: '#fde047' },
+      { alert: '#10b981', sun: '#f472b6', mint: '#93c5fd' }
+    ];
+    let paletteIndex = 0;
+
+    document.getElementById('paletteToggle').addEventListener('click', () => {
+      paletteIndex = (paletteIndex + 1) % palettes.length;
+      const theme = palettes[paletteIndex];
+      
+      document.body.style.setProperty('--alert', theme.alert);
+      document.body.style.setProperty('--sun', theme.sun);
+      document.body.style.setProperty('--mint', theme.mint);
+      
+      // Update backgrounds manually for non-CSS var elements if needed
+      // But we used CSS variables in the style tag above for the rest!
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

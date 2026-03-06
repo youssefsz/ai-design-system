@@ -1,0 +1,397 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a "Phosphor Terminal / CRT" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Retro-futuristic, hacker culture, command-line nostalgia. Think 1980s mainframe terminal reimagined for modern dev tools.
+- Typography: Use 'IBM Plex Mono' exclusively for all text. Everything is monospaced. Headings should be uppercase with wide letter-spacing. Body text uses standard casing.
+- Colors: Pure black background (#000000). Primary text in phosphor green (#00ff41). Dim text in darker green (#0a6e2e). Accent highlights in amber (#ffb000). Error/alert state in CRT red (#ff3333). All colors should feel like light emitting from a screen, not painted on.
+- Scanlines: Apply a repeating CSS gradient as a subtle full-screen scanline overlay. Lines should be 1px with very low opacity for texture without distraction.
+- Borders: All borders should be 1px solid in the dim green color. Use double borders or bracket-style decorations where appropriate.
+- Glow: Text and interactive elements should have a subtle green text-shadow glow (0 0 10px rgba(0,255,65,0.3)). Intensify on hover.
+- Interactivity: Cursor blink animation on key elements. Typing animation on the hero heading. Hover states should intensify the glow effect.
+- Layout: Full-width terminal-style sections. Hero acts as a command prompt. Feature list uses a file-directory or CLI help output format.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Green | Phosphor CLI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        phosphor: '#00ff41',
+                        dimGreen: '#0a6e2e',
+                        amber: '#ffb000',
+                        crtRed: '#ff3333',
+                        termBg: '#000000',
+                    },
+                    fontFamily: {
+                        mono: ['IBM Plex Mono', 'monospace'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background: #000000;
+            color: #00ff41;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.15) 2px,
+                rgba(0, 0, 0, 0.15) 4px
+            );
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .crt-vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.6) 100%);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .glow-strong {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.4), 0 0 20px rgba(0, 255, 65, 0.2), 0 0 40px rgba(0, 255, 65, 0.1);
+        }
+
+        .glow-amber {
+            text-shadow: 0 0 10px rgba(255, 176, 0, 0.4), 0 0 20px rgba(255, 176, 0, 0.2);
+        }
+
+        .cursor-blink::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .terminal-border {
+            border: 1px solid #0a6e2e;
+        }
+
+        .terminal-card {
+            border: 1px solid #0a6e2e;
+            transition: all 0.3s ease;
+        }
+
+        .terminal-card:hover {
+            border-color: #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.08), inset 0 0 20px rgba(0, 255, 65, 0.02);
+        }
+
+        .prompt-line::before {
+            content: '> ';
+            color: #0a6e2e;
+        }
+
+        .dir-line::before {
+            content: '  |- ';
+            color: #0a6e2e;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+        .stagger-4 { transition-delay: 400ms; }
+        .stagger-5 { transition-delay: 500ms; }
+
+        ::selection {
+            background: #00ff41;
+            color: #000000;
+        }
+
+        .btn-terminal {
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            transition: all 0.3s ease;
+        }
+
+        .btn-terminal:hover {
+            background: #00ff41;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .progress-bar {
+            height: 2px;
+            background: #0a6e2e;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #00ff41;
+            box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+        }
+
+        .ascii-box {
+            border: 1px solid #0a6e2e;
+        }
+
+        .ascii-box::before {
+            content: '+';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            color: #0a6e2e;
+            line-height: 1;
+        }
+
+        .ascii-box::after {
+            content: '+';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            color: #0a6e2e;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="scanlines"></div>
+    <div class="crt-vignette"></div>
+
+    <div class="relative z-10">
+        <!-- Header -->
+        <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-10">
+            <div class="glow">
+                <span class="text-sm font-bold uppercase tracking-[0.3em]">[phosphor://cli]</span>
+            </div>
+            <nav class="hidden gap-8 text-xs uppercase tracking-[0.2em] text-dimGreen md:flex">
+                <a href="#modules" class="hover:text-phosphor transition-colors">/modules</a>
+                <a href="#status" class="hover:text-phosphor transition-colors">/status</a>
+                <a href="#install" class="hover:text-phosphor transition-colors">/install</a>
+            </nav>
+            <button class="btn-terminal px-5 py-2 text-xs uppercase tracking-[0.2em]">
+                ssh connect
+            </button>
+        </header>
+
+        <main class="mx-auto max-w-6xl px-6 pb-32 lg:px-10">
+            <!-- Hero / Prompt Section -->
+            <section class="py-20 lg:py-32 reveal">
+                <div class="text-dimGreen text-xs uppercase tracking-wider mb-6">
+                    session.init() <span class="text-phosphor/40">// v4.2.1 stable</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.1] glow-strong mb-2" id="typed-heading">
+                </h1>
+                <div class="h-1 w-24 bg-phosphor/30 mb-10 mt-8"></div>
+
+                <p class="max-w-2xl text-sm sm:text-base text-dimGreen leading-relaxed mb-10">
+                    Phosphor is a terminal-native design system for developers who think in keystrokes.
+                    No GUI. No drag-and-drop. Just clean, composable primitives that render at the speed of thought.
+                </p>
+
+                <div class="terminal-border p-6 max-w-xl mb-10">
+                    <p class="text-xs text-dimGreen mb-2">$ installation</p>
+                    <p class="text-sm glow prompt-line">npm install @phosphor/cli --global</p>
+                    <p class="text-xs text-dimGreen mt-4 mb-2">$ quick start</p>
+                    <p class="text-sm glow prompt-line">phosphor init my-project --template=dark</p>
+                </div>
+
+                <div class="flex flex-wrap gap-4">
+                    <button class="btn-terminal px-8 py-3 text-xs font-bold uppercase tracking-[0.2em]">
+                        Get Started
+                    </button>
+                    <button class="terminal-border px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-dimGreen hover:text-phosphor hover:border-phosphor transition-all">
+                        Read the Docs
+                    </button>
+                </div>
+            </section>
+
+            <!-- Modules Section -->
+            <section id="modules" class="py-16 lg:py-24">
+                <div class="mb-12 reveal">
+                    <p class="text-xs text-dimGreen uppercase tracking-[0.3em] mb-2">ls -la /modules</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight glow">Core Modules</h2>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="terminal-card p-8 reveal stagger-1">
+                        <p class="text-amber text-xs font-bold uppercase tracking-wider mb-4 glow-amber">@phosphor/grid</p>
+                        <h3 class="text-lg font-bold mb-3 glow">Layout Engine</h3>
+                        <p class="text-dimGreen text-sm leading-relaxed mb-6">
+                            Terminal-width responsive grids. No media queries needed.
+                            Columns adapt to content volume and viewport automatically.
+                        </p>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 94%"></div>
+                        </div>
+                        <p class="text-xs text-dimGreen mt-2">stability: 94%</p>
+                    </div>
+
+                    <div class="terminal-card p-8 reveal stagger-2">
+                        <p class="text-amber text-xs font-bold uppercase tracking-wider mb-4 glow-amber">@phosphor/type</p>
+                        <h3 class="text-lg font-bold mb-3 glow">Type System</h3>
+                        <p class="text-dimGreen text-sm leading-relaxed mb-6">
+                            Monospace-native typographic scales. Font size, weight, and spacing
+                            tokens designed for fixed-width rendering.
+                        </p>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 88%"></div>
+                        </div>
+                        <p class="text-xs text-dimGreen mt-2">stability: 88%</p>
+                    </div>
+
+                    <div class="terminal-card p-8 reveal stagger-3">
+                        <p class="text-amber text-xs font-bold uppercase tracking-wider mb-4 glow-amber">@phosphor/color</p>
+                        <h3 class="text-lg font-bold mb-3 glow">Color Matrix</h3>
+                        <p class="text-dimGreen text-sm leading-relaxed mb-6">
+                            ANSI-inspired 16-color system extended to 256 tokens.
+                            Full contrast-ratio compliance out of the box.
+                        </p>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: 100%"></div>
+                        </div>
+                        <p class="text-xs text-dimGreen mt-2">stability: 100%</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section id="status" class="py-16 lg:py-24 reveal">
+                <div class="terminal-border p-10 lg:p-16">
+                    <p class="text-xs text-dimGreen uppercase tracking-[0.3em] mb-8">cat /proc/status</p>
+
+                    <div class="grid gap-8 md:grid-cols-4">
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-bold glow-strong mb-2">12.4K</p>
+                            <p class="text-xs text-dimGreen uppercase tracking-wider">Active installs</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-bold glow-strong mb-2">847</p>
+                            <p class="text-xs text-dimGreen uppercase tracking-wider">Contributors</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-bold glow-strong mb-2">3ms</p>
+                            <p class="text-xs text-dimGreen uppercase tracking-wider">Avg parse time</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl sm:text-4xl font-bold text-amber glow-amber mb-2">0</p>
+                            <p class="text-xs text-dimGreen uppercase tracking-wider">Known CVEs</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-dimGreen/30">
+                        <p class="text-xs text-dimGreen font-bold uppercase tracking-wider mb-4">recent changelog</p>
+                        <div class="space-y-2 text-sm">
+                            <p><span class="text-amber">[4.2.1]</span> <span class="text-dimGreen">2026-03-01</span> Fixed grid overflow in narrow viewports</p>
+                            <p><span class="text-amber">[4.2.0]</span> <span class="text-dimGreen">2026-02-15</span> Added @phosphor/animate module</p>
+                            <p><span class="text-amber">[4.1.9]</span> <span class="text-dimGreen">2026-02-02</span> Type system token compression</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Install CTA Section -->
+            <section id="install" class="py-16 lg:py-24 text-center reveal">
+                <p class="text-xs text-dimGreen uppercase tracking-[0.3em] mb-6">sudo phosphor enable --all</p>
+                <h2 class="text-3xl sm:text-5xl font-bold uppercase tracking-tight glow-strong mb-6">
+                    Start building in the terminal.
+                </h2>
+                <p class="mx-auto max-w-lg text-sm text-dimGreen leading-relaxed mb-10">
+                    Phosphor ships as a single binary with zero runtime dependencies.
+                    Install globally and start composing interfaces in seconds.
+                </p>
+                <div class="terminal-border inline-block p-6 mb-10">
+                    <p class="text-sm glow prompt-line cursor-blink">curl -fsSL https://phosphor.dev/install | sh</p>
+                </div>
+                <br>
+                <button class="btn-terminal px-10 py-4 text-xs font-bold uppercase tracking-[0.2em]">
+                    Download v4.2.1
+                </button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-dimGreen/30">
+            <div class="mx-auto max-w-6xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 lg:px-10 text-xs text-dimGreen">
+                <span class="uppercase tracking-[0.2em]">[phosphor://cli]</span>
+                <span>pid:2026 | session:active | uptime:99.99%</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Typing animation
+        const heading = document.getElementById('typed-heading');
+        const text = 'YOUR INTERFACE,\nRENDERED AT\n60 KEYSTROKES\nPER SECOND.';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                if (text.charAt(i) === '\n') {
+                    heading.innerHTML += '<br>';
+                } else {
+                    heading.innerHTML += text.charAt(i);
+                }
+                i++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(typeWriter, 500);
+
+        // Reveal observer
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        reveals.forEach((el) => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

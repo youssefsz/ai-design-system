@@ -1,0 +1,252 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a modern, enterprise-grade promotional landing page for a B2B or fintech product using HTML and Tailwind CSS. 
+Design Rules & Aesthetics:
+- Typography: Use Google Font 'Plus Jakarta Sans' (highly readable, professional).
+- Colors: Trustworthy corporate palette. Backgrounds in cool off-whites (#f8fafc / slate-50). Text in slate-900 for headings, slate-600 for body content. Core accents in vibrant blue (blue-600) and indigo.
+- Background Patterns: Incorporate a subtle dotted radial-gradient hero pattern for technical texture.
+- Gradients: Use linear-gradient text effects (blue to indigo) for key hero headings.
+- Depth & Shadows: Use custom soft, deep 'corporate' box-shadows on cards, rather than default Tailwind shadows.
+- Hover States: Cards should have smooth, slow transition effects that lift the element upward (translateY) while intensifying a colored, soft shadow.
+- Glassmorphism: Sticky header should use backdrop-blur with slight white transparency.
+- Shapes: Generous border radii (rounded-xl, rounded-2xl), clean geometric layouts, bordered UI elements.
+- Layout: 2-column hero featuring a bold value prop on the left, and a floating, clean UI mockup on the right, backed by a rotated soft-gradient decorative shape. Include a 3-column grid for features with softly colored icon wrappers.
+The overall vibe must be clean, minimal, geometric, highly polished, and inspire enterprise trust.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Apex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .corp-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        .corp-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .corp-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen hero-pattern">
+    
+    <!-- Top Navigation -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                    <div class="w-3 h-3 bg-white rounded-sm"></div>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">ApexFinancial</span>
+            </div>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+                <a href="#" class="hover:text-blue-600 transition-colors">Products</a>
+                <a href="#" class="hover:text-blue-600 transition-colors">Solutions</a>
+                <a href="#" class="hover:text-blue-600 transition-colors">Resources</a>
+                <a href="#" class="hover:text-blue-600 transition-colors">Enterprise</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-medium text-slate-600 hover:text-slate-900">Sign In</a>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors shadow-sm">
+                    Book a Demo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="py-24 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider border border-blue-100">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    Announcing Series C Funding
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight text-slate-900">
+                    Infrastructure for <br>
+                    <span class="gradient-text">Modern Finance</span>
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed max-w-lg">
+                    Unify your corporate spend, treasury, and accounting into one secure, compliant, and extraordinarily fast platform engineered for global scale.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button class="bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold transition-colors shadow-lg flex items-center justify-center gap-2">
+                        Get Started
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <button class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-4 rounded-xl font-semibold transition-colors shadow-sm text-center">
+                        Talk to Sales
+                    </button>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="pt-8 border-t border-slate-200 mt-8">
+                    <p class="text-sm text-slate-500 font-medium mb-4">Trusted by industry leaders globally</p>
+                    <div class="flex gap-8 opacity-60 grayscale">
+                        <div class="font-bold text-xl uppercase tracking-widest text-slate-800">AcmeCorp</div>
+                        <div class="font-bold text-xl uppercase tracking-widest text-slate-800">GlobalTech</div>
+                        <div class="font-bold text-xl uppercase tracking-widest text-slate-800">Stratos</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI Mockup -->
+            <div class="relative w-full aspect-square md:aspect-auto md:h-[600px] flex items-center justify-center">
+                
+                <!-- Background Decoration -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-indigo-50 rounded-[40px] transform -rotate-3 z-0"></div>
+                
+                <!-- Main App Card -->
+                <div class="relative z-10 w-full max-w-md bg-white rounded-2xl corp-shadow border border-slate-100 p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-xl font-bold text-slate-700">A</div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Total Balance</h3>
+                                <p class="text-xs text-slate-500">Updated just now</p>
+                            </div>
+                        </div>
+                        <div class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">+2.4%</div>
+                    </div>
+                    
+                    <div class="text-4xl font-extrabold text-slate-900 mb-8">$12,450,000.00</div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <div class="font-semibold text-sm">International Wire</div>
+                            </div>
+                            <div class="font-bold text-sm">-$45,000.00</div>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <div class="font-semibold text-sm">Client Deposit</div>
+                            </div>
+                            <div class="font-bold text-sm text-green-600">+$125,500.00</div>
+                        </div>
+                    </div>
+
+                    <button class="w-full mt-6 py-3 bg-slate-900 text-white rounded-lg font-semibold text-sm hover:bg-slate-800 transition-colors">
+                        View Full Report
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Secondary Features -->
+    <section class="bg-white py-24 border-t border-slate-200 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Enterprise Grade by Default</h2>
+                <p class="text-slate-600 text-lg">We maintain the highest standards of security, compliance, and reliability, so you can focus on building your business.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 corp-shadow corp-hover cursor-default">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Bank-level Security</h3>
+                    <p class="text-slate-600 leading-relaxed">SOC2 Type II certified. Advanced encryption at rest and in transit protects your financial data.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 corp-shadow corp-hover cursor-default">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Treasury Management</h3>
+                    <p class="text-slate-600 leading-relaxed">Automate cash sweeps, manage foreign exchange, and maximize yield on idle capital seamlessly.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-white border border-slate-100 corp-shadow corp-hover cursor-default">
+                    <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Developer API</h3>
+                    <p class="text-slate-600 leading-relaxed">Integrate natively into your ERP with our comprehensive, deeply documented GraphQL and REST APIs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="font-bold text-xl tracking-tight text-white mb-4">ApexFinancial</div>
+                <p class="text-sm max-w-sm">The operating system for modern enterprise finance. Architected for speed, built for security.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-800 text-sm flex justify-between">
+            <p>Copyright 2026 Apex Financial Inc.</p>
+            <p>San Francisco, CA</p>
+        </div>
+    </footer>
+
+    <script>
+        // Minor interaction logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const icon = btn.querySelector('svg');
+                if(icon) {
+                    icon.style.transform = 'translateX(4px)';
+                    setTimeout(() => { icon.style.transform = 'translateX(0)'; }, 200);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

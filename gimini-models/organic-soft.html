@@ -1,0 +1,184 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a calming, "Organic Minimalist" lifestyle/wellness landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Serene, holistic, grounding, luxurious, natural, editorial.
+- Typography: Use a sophisticated serif (e.g., 'Gelasio', 'Playfair Display') for primary headings and elegant touches. Use a clean, legible sans-serif (e.g., 'Karla', 'Lato') for body text. Utilize italics strategically on specific heading words for an editorial editorial flair.
+- Colors: Earthy, warm, low-contrast palette. Background should be warm off-white/cream (`#fcfaf8`). Text should be deep espresso/brown (`#4a3c31`). Accents in soft terracotta, muted sage, or warm taupe (`#8b7355`, `#e1dfd5`). Focus heavily on low-contrast elegance.
+- Shapes: Completely avoid harsh edges. Use extremely soft border radii. For hero/feature images, use custom CSS `border-radius` blob shapes (e.g., `60% 40% 30% 70%`) rather than standard squares or circles.
+- Imagery: Feature high-quality, atmospheric, moody, and highly textured photography (nature, wellness, architecture) filling the organic blob shapes.
+- Shadows: Use ultra-soft, diffused, slightly warm-tinted drop shadows rather than stark harsh box-shadows.
+- Layout: Asymmetrical, slow, and spacious. Massive padding/margins between sections. Slow CSS transitions/animations (e.g., subtle 1000ms image scaling on hover, slow-moving parallax blobs in the background).
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serein Wellness</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,600;1,400&family=Karla:wght@300;400;500&display=swap');
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background-color: #fcfaf8;
+            color: #4a3c31;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Gelasio', serif;
+        }
+
+        .soft-shadow {
+            box-shadow: 0 20px 40px -15px rgba(74, 60, 49, 0.08);
+        }
+
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transition: all 8s ease-in-out;
+        }
+
+        .blob-shape:hover {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .hero-img {
+            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-img-1 {
+            background-image: url('https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?q=80&w=600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-img-2 {
+            background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+    </style>
+</head>
+<body class="antialiased font-light relative">
+
+    <!-- Decorative background blobs -->
+    <div class="absolute top-[-10%] right-[-5%] w-[40rem] h-[40rem] bg-[#f4ebd0] blob-shape -z-10 opacity-60"></div>
+    <div class="absolute bottom-[20%] left-[-10%] w-[30rem] h-[30rem] bg-[#e1dfd5] blob-shape -z-10 opacity-60"></div>
+
+    <!-- Navigation -->
+    <nav class="max-w-7xl mx-auto px-8 py-8 flex justify-between items-center relative z-10">
+        <div class="text-2xl serif italic text-[#8b7355]">Serein.</div>
+        <div class="hidden md:flex gap-10 text-[15px] font-medium text-[#7a6b5d]">
+            <a href="#" class="hover:text-[#4a3c31] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] auto after:bg-[#4a3c31] hover:after:w-full after:transition-all">Retreats</a>
+            <a href="#" class="hover:text-[#4a3c31] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] auto after:bg-[#4a3c31] hover:after:w-full after:transition-all">Philosophy</a>
+            <a href="#" class="hover:text-[#4a3c31] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] auto after:bg-[#4a3c31] hover:after:w-full after:transition-all">Journal</a>
+        </div>
+        <button class="bg-[#4a3c31] text-[#fcfaf8] px-8 py-3 rounded-full text-[15px] hover:bg-[#342a22] transition-colors">
+            Reserve
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="max-w-7xl mx-auto px-8 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        <div class="space-y-8 z-10">
+            <p class="text-[#8b7355] tracking-widest uppercase text-xs font-medium">Find your center</p>
+            <h1 class="text-6xl md:text-7xl leading-[1.1] text-[#2c241c]">
+                A sanctuary for <br><span class="italic text-[#8b7355]">mind & body</span>
+            </h1>
+            <p class="text-lg text-[#7a6b5d] max-w-md leading-relaxed font-light">
+                Discover holistic practices grounded in nature, designed to restore balance and cultivate deep, lasting peace away from the noise of modern reality.
+            </p>
+            <div class="pt-4">
+                <button class="bg-transparent border border-[#4a3c31] text-[#4a3c31] hover:bg-[#4a3c31] hover:text-[#fcfaf8] px-10 py-4 rounded-full text-[15px] transition-all duration-500">
+                    Explore Experiences
+                </button>
+            </div>
+        </div>
+
+        <div class="relative w-full aspect-[4/5] lg:aspect-square flex justify-center items-center p-8">
+            <div class="w-full h-full hero-img blob-shape soft-shadow relative z-10"></div>
+            <!-- Decorative circle -->
+            <div class="absolute bottom-4 right-4 w-32 h-32 rounded-full border border-[#8b7355] flex items-center justify-center bg-[#fcfaf8]/50 backdrop-blur-sm z-20 spin-slow">
+                <span class="text-xs tracking-widest uppercase text-[#8b7355] text-center p-4">Breathe<br>Deeply</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Highlights Section -->
+    <section class="max-w-7xl mx-auto px-8 py-24 z-10 relative">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <h2 class="text-4xl md:text-5xl max-w-lg leading-tight">
+                Curated spaces designed to <span class="italic text-[#8b7355]">nourish</span> your inner quiet.
+            </h2>
+            <p class="text-[#7a6b5d] max-w-sm md:text-right">Every element organically sourced, every experience thoughtfully paced.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Card 1 -->
+            <div class="group cursor-pointer">
+                <div class="w-full aspect-[4/3] rounded-[3rem] overflow-hidden mb-6 soft-shadow relative">
+                    <div class="w-full h-full card-img-1 group-hover:scale-105 transition-transform duration-1000"></div>
+                </div>
+                <h3 class="text-2xl mb-2">Thermal Baths</h3>
+                <p class="text-[#7a6b5d] font-light">Mineral-rich subterranean waters heated by geothermal energy.</p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="group cursor-pointer md:mt-24">
+                <div class="w-full aspect-[4/3] rounded-[3rem] overflow-hidden mb-6 soft-shadow relative">
+                    <div class="w-full h-full card-img-2 group-hover:scale-105 transition-transform duration-1000"></div>
+                </div>
+                <h3 class="text-2xl mb-2">Meditation Pavilions</h3>
+                <p class="text-[#7a6b5d] font-light">Open-air structures immersed in ancient cedar forests.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2c241c] text-[#e1dfd5] rounded-t-[4rem] mt-20 p-12 lg:p-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-sm font-light">
+            <div class="lg:col-span-2">
+                <h2 class="text-4xl serif italic mb-6">Serein.</h2>
+                <p class="max-w-xs text-[#a39b93] leading-relaxed">Let stillness be your guide. A mindful approach to restorative luxury.</p>
+            </div>
+            <div>
+                <h4 class="font-medium mb-6 uppercase tracking-widest text-[#fcfaf8] text-xs">Journeys</h4>
+                <ul class="space-y-4 text-[#a39b93]">
+                    <li><a href="#" class="hover:text-white transition-colors">Silent Retreat</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Somatic Healing</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Forest Bathing</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-medium mb-6 uppercase tracking-widest text-[#fcfaf8] text-xs">Contact</h4>
+                <ul class="space-y-4 text-[#a39b93]">
+                    <li>Kyoto Prefecture, Japan</li>
+                    <li>hello@sereinwellness.com</li>
+                    <li>Follow slowly</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const blobs = document.querySelectorAll('.blob-shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 20;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!--
+AI PROMPT FOR THIS DESIGN AESTHETIC:
+Create a "Duotone Bold / Poster" landing page using HTML and Tailwind CSS.
+Design Rules & Aesthetics:
+- Vibe: Loud, graphic, poster-art. Think Bauhaus meets modern campaign posters. High impact, minimal words, maximum visual punch.
+- Typography: Use 'Bebas Neue' for massive uppercase display headings and 'Inter' for clean body text. Headings should dominate the viewport. Font sizes go extreme (8rem+).
+- Colors: Strict two-color system plus black and white. Primary: electric blue (#2563eb). Secondary: hot coral (#f43f5e). Background alternates between deep black (#0a0a0a) and pure white (#ffffff) for maximum section contrast. No gradients allowed in this aesthetic.
+- Shapes: Bold, hard-edged geometric shapes. Circles, rectangles, diagonal slashes. No rounded corners except on full circles. Use CSS clip-path for diagonal section dividers.
+- Borders: Thick 3-4px borders. No subtle 1px lines. Everything should feel heavy and intentional.
+- Interactivity: Snappy, fast transitions (0.2s-0.3s). Elements should scale up on hover (1.02-1.05x). Color inversions on hover for buttons.
+- Layout: Full-bleed sections. Hero takes 100vh with a massive centered heading. Feature section uses a rigid 2-column split. Numbers/stats section uses oversized typography.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duotone Bold | Poster Campaign</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        electric: '#2563eb',
+                        coral: '#f43f5e',
+                        deep: '#0a0a0a',
+                    },
+                    fontFamily: {
+                        display: ['Bebas Neue', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .section-slash {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%);
+        }
+
+        .section-slash-reverse {
+            clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .thick-border {
+            border: 3px solid currentColor;
+        }
+
+        .btn-bold {
+            border: 3px solid;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-bold-blue {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .btn-bold-blue:hover {
+            background: #2563eb;
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        .btn-bold-coral {
+            border-color: #f43f5e;
+            color: #f43f5e;
+        }
+
+        .btn-bold-coral:hover {
+            background: #f43f5e;
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        .btn-solid-blue {
+            background: #2563eb;
+            color: #ffffff;
+            border: 3px solid #2563eb;
+            transition: all 0.2s ease;
+        }
+
+        .btn-solid-blue:hover {
+            background: transparent;
+            color: #2563eb;
+            transform: scale(1.03);
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: scale(1.02);
+        }
+
+        .circle-accent {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 100ms; }
+        .stagger-2 { transition-delay: 200ms; }
+        .stagger-3 { transition-delay: 300ms; }
+
+        ::selection {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .geometric-line {
+            width: 60px;
+            height: 3px;
+        }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body class="font-body antialiased overflow-x-hidden">
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-deep/90 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between lg:px-10">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-electric flex items-center justify-center">
+                    <span class="font-display text-2xl text-white leading-none">D</span>
+                </div>
+                <span class="font-display text-2xl tracking-wider">DUOTONE</span>
+            </div>
+            <nav class="hidden gap-8 text-xs font-bold uppercase tracking-[0.2em] text-white/40 md:flex">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            </nav>
+            <button class="btn-bold btn-bold-blue px-6 py-2 text-xs font-bold">
+                Hire Us
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - Full Viewport -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-6 section-slash pb-20">
+            <div class="circle-accent bg-electric/10 -top-20 -right-20"></div>
+            <div class="circle-accent bg-coral/10 bottom-20 -left-10 w-[300px] h-[300px]"></div>
+
+            <div class="relative z-10 text-center reveal">
+                <p class="text-xs font-bold uppercase tracking-[0.4em] text-electric mb-8">Creative Studio / Est. 2024</p>
+                <h1 class="font-display text-[4rem] sm:text-[7rem] lg:text-[10rem] xl:text-[12rem] leading-[0.85] tracking-tight mb-10">
+                    BOLD<br>
+                    <span class="text-electric">IDEAS</span><br>
+                    ONLY.
+                </h1>
+                <div class="geometric-line bg-coral mx-auto mb-10"></div>
+                <p class="max-w-md mx-auto text-base text-white/50 leading-relaxed mb-12">
+                    We design identities that refuse to be ignored.
+                    High-contrast, poster-grade creative for brands with conviction.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="btn-solid-blue px-10 py-4 text-xs font-bold uppercase tracking-[0.15em]">
+                        See Our Work
+                    </button>
+                    <button class="btn-bold btn-bold-coral px-10 py-4 text-xs font-bold">
+                        Contact
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section - White Background -->
+        <section id="about" class="bg-white text-deep section-slash-reverse py-32 px-6">
+            <div class="max-w-7xl mx-auto grid gap-16 lg:grid-cols-2 lg:items-center pt-16">
+                <div class="reveal">
+                    <div class="geometric-line bg-electric mb-8"></div>
+                    <h2 class="font-display text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.9] mb-8">
+                        WE DON'T DO<br><span class="text-coral">SUBTLE.</span>
+                    </h2>
+                    <p class="text-deep/50 text-lg leading-relaxed max-w-lg">
+                        Since 2024, we have built brands that take up space. Our design language
+                        is rooted in contrast, precision, and unapologetic visibility.
+                        Quiet whispers are not in our vocabulary.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 reveal stagger-1">
+                    <div class="bg-deep text-white p-8 hover-lift">
+                        <p class="font-display text-5xl sm:text-6xl text-electric mb-2 counter">86</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-white/50">Projects Shipped</p>
+                    </div>
+                    <div class="bg-coral text-white p-8 hover-lift">
+                        <p class="font-display text-5xl sm:text-6xl mb-2 counter">14</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-white/80">Countries</p>
+                    </div>
+                    <div class="bg-electric text-white p-8 hover-lift">
+                        <p class="font-display text-5xl sm:text-6xl mb-2 counter">4.9</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-white/80">Avg Rating</p>
+                    </div>
+                    <div class="thick-border border-deep text-deep p-8 hover-lift">
+                        <p class="font-display text-5xl sm:text-6xl mb-2 counter">23</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-deep/50">Team Members</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="bg-deep py-32 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-16 reveal">
+                    <div class="geometric-line bg-coral mb-8"></div>
+                    <h2 class="font-display text-5xl sm:text-7xl tracking-tight">SELECTED WORK</h2>
+                </div>
+
+                <div class="grid gap-4">
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="thick-border border-white/10 p-10 hover-lift reveal stagger-1 group cursor-pointer">
+                            <div class="flex justify-between items-start mb-8">
+                                <span class="text-xs font-bold uppercase tracking-[0.3em] text-electric">Branding</span>
+                                <span class="text-xs text-white/30">2026</span>
+                            </div>
+                            <h3 class="font-display text-4xl sm:text-5xl mb-4 group-hover:text-electric transition-colors">VOLTA ENERGY</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">
+                                Complete visual identity for a renewable energy startup.
+                                Bold typography systems, icon library, and brand guidelines.
+                            </p>
+                        </div>
+
+                        <div class="thick-border border-white/10 p-10 hover-lift reveal stagger-2 group cursor-pointer">
+                            <div class="flex justify-between items-start mb-8">
+                                <span class="text-xs font-bold uppercase tracking-[0.3em] text-coral">Campaign</span>
+                                <span class="text-xs text-white/30">2025</span>
+                            </div>
+                            <h3 class="font-display text-4xl sm:text-5xl mb-4 group-hover:text-coral transition-colors">NIGHT MARKET</h3>
+                            <p class="text-white/40 text-sm leading-relaxed">
+                                Event branding and promotional campaign for an urban food festival.
+                                Poster series, digital ads, and environmental graphics.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="thick-border border-white/10 p-10 hover-lift reveal stagger-3 group cursor-pointer">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-[0.3em] text-electric mb-4 block">Digital Product</span>
+                                <h3 class="font-display text-4xl sm:text-6xl group-hover:text-electric transition-colors">ATLAS PLATFORM</h3>
+                            </div>
+                            <p class="text-white/40 text-sm leading-relaxed max-w-md">
+                                End-to-end product design for a logistics management platform.
+                                Dashboard UI, design system, and motion language.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section - White -->
+        <section id="contact" class="bg-white text-deep py-32 px-6">
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <div class="geometric-line bg-electric mx-auto mb-8"></div>
+                <h2 class="font-display text-5xl sm:text-8xl lg:text-[9rem] tracking-tight leading-[0.85] mb-8">
+                    LET'S<br>
+                    <span class="text-coral">TALK.</span>
+                </h2>
+                <p class="text-deep/50 text-lg leading-relaxed max-w-md mx-auto mb-12">
+                    Have a project that needs volume? We are ready to
+                    turn it into something impossible to overlook.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="mailto:studio@duotone.design" class="bg-deep text-white px-10 py-5 text-xs font-bold uppercase tracking-[0.15em] thick-border border-deep hover:bg-transparent hover:text-deep transition-all inline-block">
+                        studio@duotone.design
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-deep border-t-[3px] border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6 lg:px-10">
+            <div class="flex items-center gap-4">
+                <div class="w-8 h-8 bg-electric flex items-center justify-center">
+                    <span class="font-display text-lg text-white leading-none">D</span>
+                </div>
+                <span class="font-display text-lg tracking-wider">DUOTONE</span>
+            </div>
+            <p class="text-xs text-white/30 uppercase tracking-wider">
+                2026 Duotone Studio. No half-measures.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach((el) => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseFloat(el.textContent);
+                    const isDecimal = el.textContent.includes('.');
+                    let current = 0;
+                    const increment = target / 40;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+                    }, 30);
+                    counterObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(el => counterObserver.observe(el));
+    </script>
+</body>
+</html>
