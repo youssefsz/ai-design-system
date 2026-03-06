@@ -1,5 +1,7 @@
 # AI Promoted Design System
 
+![AI Promoted Design System Preview](splash.png)
+
 ## Overview
 
 This repository serves as a centralized collection of high fidelity design models and aesthetic templates. It provides a structured approach for generating and referencing specific visual styles using HTML and Tailwind CSS. The primary purpose of this repository is to act as a source of truth for various design languages, ensuring consistency and precision when prompting artificial intelligence for frontend development.
